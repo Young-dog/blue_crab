@@ -12,6 +12,8 @@ class Palette extends ThemeExtension<Palette> {
     required this.iconSecondary,
     required this.iconTertiary,
     required this.iconContrast,
+    required this.iconAccentFirst,
+    required this.iconAccentThird,
     // Background
     required this.bgPrimary,
     required this.bgSecondary,
@@ -24,6 +26,8 @@ class Palette extends ThemeExtension<Palette> {
     required this.buttonTertiary,
     required this.buttonContrast,
     required this.buttonDisabled,
+    // Other
+    required this.other,
   });
 
   const Palette.light()
@@ -34,10 +38,12 @@ class Palette extends ThemeExtension<Palette> {
           textTertiary: const Color(0xFFA0A9B2),
           textContrast: const Color(0xFFFFFFFF),
           // Icon
-          iconPrimary: const Color(0xFF343A40),
+          iconPrimary: const Color(0xFF0077b6),
           iconSecondary: const Color(0xFF707C8C),
           iconTertiary: const Color(0xFFA0A9B2),
           iconContrast: const Color(0xFFFFFFFF),
+          iconAccentFirst: const Color(0xFFDE0A26),
+          iconAccentThird: const Color(0xFFFFAB2B),
           // Background
           bgPrimary: const Color(0xFFF4F4F4),
           bgSecondary: const Color(0xFFF2F3F7),
@@ -48,8 +54,10 @@ class Palette extends ThemeExtension<Palette> {
           buttonPrimary: const Color(0xFF0077b6),
           buttonSecondary: const Color(0xFF707C8C),
           buttonTertiary: const Color(0xFF343A40),
-          buttonContrast: const Color(0xFFF2F3F7),
+          buttonContrast: const Color(0xFFFFFFFF),
           buttonDisabled: const Color(0xFFF2F2F2),
+          // Other
+          other: const OtherColors.regular(),
         );
 
   // Text
@@ -63,6 +71,8 @@ class Palette extends ThemeExtension<Palette> {
   final Color iconSecondary;
   final Color iconTertiary;
   final Color iconContrast;
+  final Color iconAccentFirst;
+  final Color iconAccentThird;
 
   // Background
   final Color bgPrimary;
@@ -78,7 +88,8 @@ class Palette extends ThemeExtension<Palette> {
   final Color buttonContrast;
   final Color buttonDisabled;
 
-
+  // Other
+  final OtherColors other;
 
   @override
   Palette copyWith({
@@ -90,6 +101,8 @@ class Palette extends ThemeExtension<Palette> {
     Color? iconSecondary,
     Color? iconTertiary,
     Color? iconContrast,
+    Color? iconAccentFirst,
+    Color? iconAccentThird,
     Color? bgPrimary,
     Color? bgSecondary,
     Color? bgTertiary,
@@ -100,6 +113,7 @@ class Palette extends ThemeExtension<Palette> {
     Color? buttonTertiary,
     Color? buttonContrast,
     Color? buttonDisabled,
+    OtherColors? other,
   }) {
     return Palette(
       // Text
@@ -112,6 +126,8 @@ class Palette extends ThemeExtension<Palette> {
       iconSecondary: iconSecondary ?? this.iconSecondary,
       iconTertiary: iconTertiary ?? this.iconTertiary,
       iconContrast: iconContrast ?? this.iconContrast,
+      iconAccentFirst: iconAccentFirst ?? this.iconAccentFirst,
+      iconAccentThird: iconAccentThird ?? this.iconAccentThird,
       // Background
       bgPrimary: bgPrimary ?? this.bgPrimary,
       bgSecondary: bgSecondary ?? this.bgSecondary,
@@ -124,6 +140,8 @@ class Palette extends ThemeExtension<Palette> {
       buttonTertiary: buttonTertiary ?? this.buttonTertiary,
       buttonContrast: buttonContrast ?? this.buttonContrast,
       buttonDisabled: buttonDisabled ?? this.buttonDisabled,
+      // Other
+      other: other ?? this.other,
     );
   }
 
@@ -144,6 +162,8 @@ class Palette extends ThemeExtension<Palette> {
       iconSecondary: Color.lerp(iconSecondary, other.iconSecondary, t)!,
       iconTertiary: Color.lerp(iconTertiary, other.iconTertiary, t)!,
       iconContrast: Color.lerp(iconContrast, other.iconContrast, t)!,
+      iconAccentFirst: Color.lerp(iconAccentFirst, other.iconAccentFirst, t)!,
+      iconAccentThird: Color.lerp(iconAccentThird, other.iconAccentThird, t)!,
       // Background
       bgPrimary: Color.lerp(bgPrimary, other.bgPrimary, t)!,
       bgSecondary: Color.lerp(bgSecondary, other.bgSecondary, t)!,
@@ -156,6 +176,43 @@ class Palette extends ThemeExtension<Palette> {
       buttonTertiary: Color.lerp(buttonTertiary, other.buttonTertiary, t)!,
       buttonContrast: Color.lerp(buttonContrast, other.buttonContrast, t)!,
       buttonDisabled: Color.lerp(buttonDisabled, other.buttonDisabled, t)!,
+      // Other
+      other: OtherColors.lerp(this.other, other.other, t),
     );
   }
+}
+
+class OtherColors {
+  const OtherColors({
+    required this.critical,
+    required this.important,
+    required this.medium,
+    required this.low,
+    required this.deferred,
+  });
+
+  const OtherColors.regular()
+      : this(
+          critical: const Color(0xFF9d0208),
+          important: const Color(0xFFe85d04),
+          medium: const Color(0xFFffba08),
+          low: const Color(0xFF55a630),
+          deferred: const Color(0xFF90e0ef),
+        );
+
+  OtherColors.lerp(
+    OtherColors a,
+    OtherColors b,
+    double t,
+  )   : critical = Color.lerp(a.critical, b.critical, t)!,
+        important = Color.lerp(a.important, b.important, t)!,
+        medium = Color.lerp(a.medium, b.medium, t)!,
+        low = Color.lerp(a.low, b.low, t)!,
+        deferred = Color.lerp(a.deferred, b.deferred, t)!;
+
+  final Color critical;
+  final Color important;
+  final Color medium;
+  final Color low;
+  final Color deferred;
 }

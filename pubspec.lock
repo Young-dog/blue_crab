@@ -286,6 +286,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "8.1.3"
+  flutter_colorpicker:
+    dependency: "direct main"
+    description:
+      name: flutter_colorpicker
+      sha256: "458a6ed8ea480eb16ff892aedb4b7092b2804affd7e046591fb03127e8d8ef8b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -771,7 +779,7 @@ packages:
     source: hosted
     version: "3.0.9"
   talker:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: talker
       sha256: "9c587c0269e194ea5c161b01fa5c4e4120926f4b8fedcf9b3bd2466cb500b880"
@@ -779,7 +787,7 @@ packages:
     source: hosted
     version: "3.1.4"
   talker_bloc_logger:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: talker_bloc_logger
       sha256: "675ee30f8d32196c510c2f36390d2bfcb88ac4a403de6a7e02b66b98007ced2f"
@@ -787,7 +795,7 @@ packages:
     source: hosted
     version: "2.2.1"
   talker_dio_logger:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: talker_dio_logger
       sha256: "5b8dd43e8d837b8e1d39d94157193ba691efe03ec009cd6f43c197bde6981ea5"
@@ -795,7 +803,7 @@ packages:
     source: hosted
     version: "2.3.1"
   talker_flutter:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: talker_flutter
       sha256: ade0ecf82a0e1adfdd001ec275fabc5097d647ea41032d3604894059877c4264

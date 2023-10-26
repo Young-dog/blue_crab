@@ -1,0 +1,29 @@
+{
+  "track_page" : {
+    "habits_box_title" : "Привычки",
+    "purposes_box_title" : "Цели",
+    "tasks_box_title" : "Задачи и события"
+  },
+  "priority_task" : {
+    "critical" : "Критичный",
+    "important" : "Важный",
+    "medium" : "Средний",
+    "low" : "Низкий",
+    "deferred" : "Отложеный"
+  },
+  "task_type" : {
+    "task" : "Задача",
+    "event" : "Событие"
+  },
+  "task_page" : {
+    "title_label" : "Название..."
+  },
+  "calendar_button" : {
+    "add" : "Добавить",
+    "time" : "+ Время",
+    "delete" : "Удалить"
+  },
+  "subtask_input" : {
+    "hint_text" : "Подзадача"
+  }
+}

@@ -1,7 +1,11 @@
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
+import '../../data/data.dart';
+import '../../domain/domain.dart';
+import '../../presentation/presentation.dart';
 import '../app.dart';
 
 final _getIt = GetIt.instance;
@@ -23,11 +27,30 @@ Future<void> _registerServices() async {
     )
     ..registerLazySingleton<AppRouter>(
       AppRouter.new,
+    )
+    ..registerLazySingleton<HiveInterface>(
+      () => Hive,
     );
 }
 
-Future<void> _registerDataSources() async {}
+Future<void> _registerDataSources() async {
+  _getIt.registerSingletonAsync<LocaleTagsDataSource>(
+    () async => LocaleTagsDataSourceImpl.create(
+      hive: _getIt(),
+    ),
+  );
+}
 
-Future<void> _registerRepositories() async {}
+Future<void> _registerRepositories() async {
+  _getIt.registerLazySingleton<TagsRepository>(
+    () => TagsRepositoryImpl(
+      localeTagsDataSource: _getIt(),
+    ),
+  );
+}
 
-Future<void> _registerBlocs() async {}
+Future<void> _registerBlocs() async {
+  _getIt.registerFactory(
+    TrackBloc.new,
+  );
+}

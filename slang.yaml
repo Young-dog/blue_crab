@@ -1,2 +1,2 @@
 input_directory: assets/i18n
-output_directory: lib/app/i18n # defaulting to lib/gen if input is outside of lib/
+output_directory: lib/app/i18n

@@ -60,8 +60,8 @@ class LightThemeBuilder implements ThemeBuilder {
     required Palette palette,
   }) {
     return AppBarTheme(
-      backgroundColor: palette.bgContrast,
-      surfaceTintColor: palette.bgContrast,
+      backgroundColor: palette.bgPrimary,
+      surfaceTintColor: palette.bgPrimary,
       iconTheme: IconThemeData(color: palette.iconPrimary),
     );
   }

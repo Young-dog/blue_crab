@@ -1,12 +1,12 @@
 /// Generated file. Do not edit.
 ///
-/// Original: lib/app/i18n
+/// Original: assets/i18n
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 0 (0 per locale)
+/// Strings: 30 (15 per locale)
 ///
-/// Built on 2023-10-23 at 20:19 UTC
+/// Built on 2023-10-26 at 15:31 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -150,6 +150,81 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	late final _StringsEn _root = this; // ignore: unused_field
 
 	// Translations
+	late final _StringsTrackPageEn track_page = _StringsTrackPageEn._(_root);
+	late final _StringsPriorityTaskEn priority_task = _StringsPriorityTaskEn._(_root);
+	late final _StringsTaskTypeEn task_type = _StringsTaskTypeEn._(_root);
+	late final _StringsTaskPageEn task_page = _StringsTaskPageEn._(_root);
+	late final _StringsCalendarButtonEn calendar_button = _StringsCalendarButtonEn._(_root);
+	late final _StringsSubtaskInputEn subtask_input = _StringsSubtaskInputEn._(_root);
+}
+
+// Path: track_page
+class _StringsTrackPageEn {
+	_StringsTrackPageEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get habits_box_title => 'Habits';
+	String get purposes_box_title => 'Purposes';
+	String get tasks_box_title => 'Tasks and events';
+}
+
+// Path: priority_task
+class _StringsPriorityTaskEn {
+	_StringsPriorityTaskEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get critical => 'Critical';
+	String get important => 'Important';
+	String get medium => 'Medium';
+	String get low => 'Low';
+	String get deferred => 'Deferred';
+}
+
+// Path: task_type
+class _StringsTaskTypeEn {
+	_StringsTaskTypeEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get task => 'Task';
+	String get event => 'Event';
+}
+
+// Path: task_page
+class _StringsTaskPageEn {
+	_StringsTaskPageEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get title_label => 'Title...';
+}
+
+// Path: calendar_button
+class _StringsCalendarButtonEn {
+	_StringsCalendarButtonEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get add => 'Добавить';
+	String get time => '+ Время';
+	String get delete => 'Удалить';
+}
+
+// Path: subtask_input
+class _StringsSubtaskInputEn {
+	_StringsSubtaskInputEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get hint_text => 'Подзадача';
 }
 
 // Path: <root>
@@ -177,6 +252,81 @@ class _StringsRu implements _StringsEn {
 	@override late final _StringsRu _root = this; // ignore: unused_field
 
 	// Translations
+	@override late final _StringsTrackPageRu track_page = _StringsTrackPageRu._(_root);
+	@override late final _StringsPriorityTaskRu priority_task = _StringsPriorityTaskRu._(_root);
+	@override late final _StringsTaskTypeRu task_type = _StringsTaskTypeRu._(_root);
+	@override late final _StringsTaskPageRu task_page = _StringsTaskPageRu._(_root);
+	@override late final _StringsCalendarButtonRu calendar_button = _StringsCalendarButtonRu._(_root);
+	@override late final _StringsSubtaskInputRu subtask_input = _StringsSubtaskInputRu._(_root);
+}
+
+// Path: track_page
+class _StringsTrackPageRu implements _StringsTrackPageEn {
+	_StringsTrackPageRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get habits_box_title => 'Привычки';
+	@override String get purposes_box_title => 'Цели';
+	@override String get tasks_box_title => 'Задачи и события';
+}
+
+// Path: priority_task
+class _StringsPriorityTaskRu implements _StringsPriorityTaskEn {
+	_StringsPriorityTaskRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get critical => 'Критичный';
+	@override String get important => 'Важный';
+	@override String get medium => 'Средний';
+	@override String get low => 'Низкий';
+	@override String get deferred => 'Отложеный';
+}
+
+// Path: task_type
+class _StringsTaskTypeRu implements _StringsTaskTypeEn {
+	_StringsTaskTypeRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get task => 'Задача';
+	@override String get event => 'Событие';
+}
+
+// Path: task_page
+class _StringsTaskPageRu implements _StringsTaskPageEn {
+	_StringsTaskPageRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_label => 'Название...';
+}
+
+// Path: calendar_button
+class _StringsCalendarButtonRu implements _StringsCalendarButtonEn {
+	_StringsCalendarButtonRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get add => 'Добавить';
+	@override String get time => '+ Время';
+	@override String get delete => 'Удалить';
+}
+
+// Path: subtask_input
+class _StringsSubtaskInputRu implements _StringsSubtaskInputEn {
+	_StringsSubtaskInputRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get hint_text => 'Подзадача';
 }
 
 /// Flat map(s) containing all translations.
@@ -185,6 +335,21 @@ class _StringsRu implements _StringsEn {
 extension on _StringsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'track_page.habits_box_title': return 'Habits';
+			case 'track_page.purposes_box_title': return 'Purposes';
+			case 'track_page.tasks_box_title': return 'Tasks and events';
+			case 'priority_task.critical': return 'Critical';
+			case 'priority_task.important': return 'Important';
+			case 'priority_task.medium': return 'Medium';
+			case 'priority_task.low': return 'Low';
+			case 'priority_task.deferred': return 'Deferred';
+			case 'task_type.task': return 'Task';
+			case 'task_type.event': return 'Event';
+			case 'task_page.title_label': return 'Title...';
+			case 'calendar_button.add': return 'Добавить';
+			case 'calendar_button.time': return '+ Время';
+			case 'calendar_button.delete': return 'Удалить';
+			case 'subtask_input.hint_text': return 'Подзадача';
 			default: return null;
 		}
 	}
@@ -193,6 +358,21 @@ extension on _StringsEn {
 extension on _StringsRu {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'track_page.habits_box_title': return 'Привычки';
+			case 'track_page.purposes_box_title': return 'Цели';
+			case 'track_page.tasks_box_title': return 'Задачи и события';
+			case 'priority_task.critical': return 'Критичный';
+			case 'priority_task.important': return 'Важный';
+			case 'priority_task.medium': return 'Средний';
+			case 'priority_task.low': return 'Низкий';
+			case 'priority_task.deferred': return 'Отложеный';
+			case 'task_type.task': return 'Задача';
+			case 'task_type.event': return 'Событие';
+			case 'task_page.title_label': return 'Название...';
+			case 'calendar_button.add': return 'Добавить';
+			case 'calendar_button.time': return '+ Время';
+			case 'calendar_button.delete': return 'Удалить';
+			case 'subtask_input.hint_text': return 'Подзадача';
 			default: return null;
 		}
 	}

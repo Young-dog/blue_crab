@@ -1,10 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../app/app.dart';
 
 class NavigateBottomBar extends StatelessWidget {
-  const NavigateBottomBar({super.key});
+  const NavigateBottomBar({
+    required this.tabsRouter,
+    super.key,
+  });
+
+  final TabsRouter tabsRouter;
 
   @override
   Widget build(BuildContext context) {
@@ -34,27 +40,39 @@ class NavigateBottomBar extends StatelessWidget {
               child: Row(
                 children: [
                   IconButton(
-                    onPressed: () {},
-                    icon: const FaIcon(
+                    onPressed: () {
+                      _onTap(0, tabsRouter);
+                    },
+                    icon: FaIcon(
                       FontAwesomeIcons.calendar,
+                      color: theme.palette.buttonPrimary,
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
-                    icon: const FaIcon(
+                    onPressed: () {
+                      _onTap(1, tabsRouter);
+                    },
+                    icon: FaIcon(
                       FontAwesomeIcons.creditCard,
+                      color: theme.palette.buttonPrimary,
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
-                    icon: const FaIcon(
+                    onPressed: () {
+                      _onTap(2, tabsRouter);
+                    },
+                    icon: FaIcon(
                       FontAwesomeIcons.search,
+                      color: theme.palette.buttonPrimary,
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
-                    icon: const FaIcon(
+                    onPressed: () {
+                      _onTap(3, tabsRouter);
+                    },
+                    icon: FaIcon(
                       FontAwesomeIcons.cogs,
+                      color: theme.palette.buttonPrimary,
                     ),
                   ),
                 ],
@@ -64,5 +82,9 @@ class NavigateBottomBar extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onTap(int index, TabsRouter tabsRouter) {
+    tabsRouter.setActiveIndex(index);
   }
 }

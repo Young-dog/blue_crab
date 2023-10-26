@@ -9,11 +9,10 @@ import '../app.dart';
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
-  await registerDependencies();
 
-  final talker = GetIt.instance<Talker>();
+  final talker = TalkerFlutter.init();
 
-  final talkerBloc = GetIt.instance<TalkerBlocObserver>();
+  final talkerBloc = TalkerBlocObserver(talker: talker,);
 
   FlutterError.onError = (details) => talker.handle(
         details.exception,
@@ -29,11 +28,17 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
       await initializeHive();
 
+      await registerDependencies();
+
       await GetIt.instance.allReady();
 
       Bloc.observer = talkerBloc;
 
-      runApp(await builder());
+      runApp(
+        TranslationProvider(
+          child: await builder(),
+        ),
+      );
     },
     talker.handle,
   );
