@@ -4,7 +4,12 @@ import '../../../../../../app/app.dart';
 import '../../../../../presentation.dart';
 
 class TitleInput extends StatelessWidget {
-  const TitleInput({super.key});
+  const TitleInput({
+    required this.title,
+    super.key,
+  });
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +18,7 @@ class TitleInput extends StatelessWidget {
     final t = Translations.of(context);
 
     return FilledInput(
+      initialValue: title,
       onChanged: (value) {
         context.read<TasksBloc>().add(
               ChangeTitleTaskEvent(

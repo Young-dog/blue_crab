@@ -8,6 +8,7 @@ enum TasksStatus {
   delTimeEnd,
   delTag,
   delPriorityTask,
+  changeSubtask,
   success;
 
   bool get isDelDateFirst => this == delDateFirst;
@@ -21,6 +22,8 @@ enum TasksStatus {
   bool get isDelTag => this == delTag;
 
   bool get isDelPriorityTask => this == delPriorityTask;
+
+  bool get isAddSubtask => this == changeSubtask;
 
   bool get isInitial => this == delDateEnd;
 
@@ -41,6 +44,7 @@ class TasksState extends Equatable {
     required this.timeEnd,
     required this.subtasks,
     required this.days,
+    required this.finish,
   });
 
   TasksState.initial({
@@ -55,7 +59,8 @@ class TasksState extends Equatable {
         title = '',
         description = '',
         subtasks = <Subtask>[],
-        days = <int>[];
+        days = <int>[],
+        finish = false;
 
   final TasksStatus status;
   final TypeTask type;
@@ -69,6 +74,7 @@ class TasksState extends Equatable {
   final TimeOfDay? timeEnd;
   final List<Subtask> subtasks;
   final List<int> days;
+  final bool finish;
 
   TasksState copyWith({
     TasksStatus? status,
@@ -83,20 +89,28 @@ class TasksState extends Equatable {
     TimeOfDay? timeEnd,
     List<Subtask>? subtasks,
     List<int>? days,
+    bool? finish,
   }) {
     return TasksState(
       status: status ?? this.status,
       type: type ?? this.type,
       title: title ?? this.title,
       description: description ?? this.description,
-      priority: (status?.isDelPriorityTask ?? false) ? null : priority ?? this.priority,
+      priority: (status?.isDelPriorityTask ?? false)
+          ? null
+          : priority ?? this.priority,
       tag: (status?.isDelTag ?? false) ? null : tag ?? this.tag,
-      dateStart: (status?.isDelDateFirst ?? false) ? null : dateStart ?? this.dateStart,
+      dateStart: (status?.isDelDateFirst ?? false)
+          ? null
+          : dateStart ?? this.dateStart,
       dateEnd: (status?.isDelDateEnd ?? false) ? null : dateEnd ?? this.dateEnd,
-      timeStart: (status?.isDelTimeFirst ?? false) ? null : timeStart ?? this.timeStart,
+      timeStart: (status?.isDelTimeFirst ?? false)
+          ? null
+          : timeStart ?? this.timeStart,
       timeEnd: (status?.isDelTimeEnd ?? false) ? null : timeEnd ?? this.timeEnd,
       subtasks: subtasks ?? this.subtasks,
       days: days ?? this.days,
+      finish: finish ?? this.finish,
     );
   }
 
@@ -114,5 +128,6 @@ class TasksState extends Equatable {
         timeEnd,
         subtasks,
         days,
+        finish
       ];
 }

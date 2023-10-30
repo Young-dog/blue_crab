@@ -34,19 +34,31 @@ Future<void> _registerServices() async {
 }
 
 Future<void> _registerDataSources() async {
-  _getIt.registerSingletonAsync<LocaleTagsDataSource>(
-    () async => LocaleTagsDataSourceImpl.create(
-      hive: _getIt(),
-    ),
-  );
+  _getIt
+    ..registerSingletonAsync<LocaleTagsDataSource>(
+      () async => LocaleTagsDataSourceImpl.create(
+        hive: _getIt(),
+      ),
+    )
+    ..registerSingletonAsync<LocaleTasksDataSource>(
+      () async => LocaleTasksDataSourceImpl.create(
+        hive: _getIt(),
+      ),
+    );
 }
 
 Future<void> _registerRepositories() async {
-  _getIt.registerLazySingleton<TagsRepository>(
-    () => TagsRepositoryImpl(
-      localeTagsDataSource: _getIt(),
-    ),
-  );
+  _getIt
+    ..registerLazySingleton<TagsRepository>(
+      () => TagsRepositoryImpl(
+        localeTagsDataSource: _getIt(),
+      ),
+    )
+    ..registerLazySingleton<TasksRepository>(
+      () => TasksRepositoryImpl(
+        localeTasksDataSource: _getIt(),
+      ),
+    );
 }
 
 Future<void> _registerBlocs() async {

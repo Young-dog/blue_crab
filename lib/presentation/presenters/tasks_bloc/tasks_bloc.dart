@@ -9,7 +9,9 @@ part 'tasks_event.dart';
 part 'tasks_state.dart';
 
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
-  TasksBloc() : super(TasksState.initial()) {
+  TasksBloc({required TasksRepository tasksRepository})
+      : _tasksRepository = tasksRepository,
+        super(TasksState.initial()) {
     on<ChangeTypeTaskEvent>(_onChangeTypeTask);
     on<ChangeTitleTaskEvent>(_onChangeTitleTask);
     on<ChangeDescriptionTaskEvent>(_onChangeDescriptionTask);
@@ -19,7 +21,11 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     on<ChangeTimeStartTaskEvent>(_onChangeTimeFirstTask);
     on<ChangeDateEndTaskEvent>(_onChangeDateEndTask);
     on<ChangeTimeEndTaskEvent>(_onChangeTimeEndTask);
+    on<ChangeSubtasksTaskEvent>(_onChangeSubtasksTasks);
+    on<AddTaskEvent>(_onAddTask);
   }
+
+  final TasksRepository _tasksRepository;
 
   void _onChangeTypeTask(
     ChangeTypeTaskEvent event,
@@ -33,9 +39,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   void _onChangeTitleTask(
-      ChangeTitleTaskEvent event,
-      Emitter<TasksState> emit,
-      ) {
+    ChangeTitleTaskEvent event,
+    Emitter<TasksState> emit,
+  ) {
     emit(
       state.copyWith(
         title: event.title,
@@ -44,9 +50,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   void _onChangeDescriptionTask(
-      ChangeDescriptionTaskEvent event,
-      Emitter<TasksState> emit,
-      ) {
+    ChangeDescriptionTaskEvent event,
+    Emitter<TasksState> emit,
+  ) {
     emit(
       state.copyWith(
         description: event.description,
@@ -55,9 +61,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   void _onChangePriorityTask(
-      ChangePriorityTaskEvent event,
-      Emitter<TasksState> emit,
-      ) {
+    ChangePriorityTaskEvent event,
+    Emitter<TasksState> emit,
+  ) {
     emit(
       state.copyWith(
         priority: event.priority,
@@ -66,9 +72,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   void _onChangeTagTask(
-      ChangeTagTaskEvent event,
-      Emitter<TasksState> emit,
-      ) {
+    ChangeTagTaskEvent event,
+    Emitter<TasksState> emit,
+  ) {
     if (event.tag == null) {
       emit(
         state.copyWith(
@@ -82,13 +88,12 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
         ),
       );
     }
-
   }
 
   void _onChangeDateFirstTask(
-      ChangeDateStartTaskEvent event,
-      Emitter<TasksState> emit,
-      ) {
+    ChangeDateStartTaskEvent event,
+    Emitter<TasksState> emit,
+  ) {
     if (event.date == null) {
       emit(
         state.copyWith(
@@ -105,10 +110,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   void _onChangeTimeFirstTask(
-      ChangeTimeStartTaskEvent event,
-      Emitter<TasksState> emit,
-      ) {
-    print(event.time);
+    ChangeTimeStartTaskEvent event,
+    Emitter<TasksState> emit,
+  ) {
     if (event.time == null) {
       emit(
         state.copyWith(
@@ -125,9 +129,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   void _onChangeDateEndTask(
-      ChangeDateEndTaskEvent event,
-      Emitter<TasksState> emit,
-      ) {
+    ChangeDateEndTaskEvent event,
+    Emitter<TasksState> emit,
+  ) {
     if (event.date == null) {
       emit(
         state.copyWith(
@@ -141,13 +145,12 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
         ),
       );
     }
-
   }
 
   void _onChangeTimeEndTask(
-      ChangeTimeEndTaskEvent event,
-      Emitter<TasksState> emit,
-      ) {
+    ChangeTimeEndTaskEvent event,
+    Emitter<TasksState> emit,
+  ) {
     if (event.time == null) {
       emit(
         state.copyWith(
@@ -161,6 +164,69 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
         ),
       );
     }
+  }
 
+  void _onChangeSubtasksTasks(
+    ChangeSubtasksTaskEvent event,
+    Emitter<TasksState> emit,
+  ) {
+    final subtasks = state.subtasks;
+
+    if (event.subtask == null) {
+      if (event.index != null) {
+        subtasks.removeAt(event.index!);
+        emit(
+          state.copyWith(
+            status: TasksStatus.changeSubtask,
+            subtasks: subtasks,
+          ),
+        );
+      }
+    } else {
+      if (event.index == null) {
+        subtasks.add(event.subtask!);
+        emit(
+          state.copyWith(
+            status: TasksStatus.changeSubtask,
+            subtasks: subtasks,
+          ),
+        );
+      } else {
+        subtasks[event.index!] = event.subtask!;
+        emit(
+          state.copyWith(
+            status: TasksStatus.changeSubtask,
+            subtasks: subtasks,
+          ),
+        );
+      }
+    }
+
+    emit(
+      state.copyWith(
+        status: TasksStatus.success,
+      ),
+    );
+  }
+
+  Future<void> _onAddTask(
+    AddTaskEvent event,
+    Emitter<TasksState> emit,
+  ) async {
+    if (state.type == TypeTask.task) {
+      await _tasksRepository.addTask(
+        title: state.title,
+        description: state.description,
+        priority: state.priority,
+        dateStart: state.dateStart,
+        dateEnd: state.dateEnd,
+        timeStart: state.timeStart,
+        timeEnd: state.timeEnd,
+        subtasks: state.subtasks,
+        tag: state.tag,
+        finish: state.finish,
+        index: event.index,
+      );
+    }
   }
 }

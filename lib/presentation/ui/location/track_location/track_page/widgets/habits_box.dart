@@ -16,7 +16,7 @@ class HabitsBox extends StatelessWidget {
       icon: AssetNames.habitsIcon,
       title: t.track_page.habits_box_title,
       colorIcon: theme.palette.iconAccentFirst,
-      onPressedAdd: () {},
+      onPressedAdd: () {}, child: Container(),
     );
   }
 }

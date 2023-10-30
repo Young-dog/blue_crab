@@ -16,7 +16,7 @@ class PurposesBox extends StatelessWidget {
       icon: AssetNames.cupIcon,
       title: t.track_page.purposes_box_title,
       colorIcon: theme.palette.iconAccentThird,
-      onPressedAdd: () {},
+      onPressedAdd: () {}, child: Container(),
     );
   }
 }

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../app/app.dart';
+import '../../../../presentation.dart';
 
 class SubtaskInput extends StatefulWidget {
   const SubtaskInput({
     required this.onSaved,
     this.finish = false,
     this.title = '',
-    this.controller,
     super.key,
   });
 
-  final TextEditingController? controller;
   final bool finish;
   final String title;
   final void Function({
     required String text,
     required bool checkBoxState,
+    required TextEditingController controller,
   }) onSaved;
 
   @override
@@ -24,6 +24,8 @@ class SubtaskInput extends StatefulWidget {
 }
 
 class _SubtaskInputState extends State<SubtaskInput> {
+  late final TextEditingController _controller;
+
   late String _text;
 
   late bool _checkBoxState;
@@ -32,6 +34,7 @@ class _SubtaskInputState extends State<SubtaskInput> {
   void initState() {
     _text = widget.title;
     _checkBoxState = widget.finish;
+    _controller = TextEditingController()..text = widget.title;
     super.initState();
   }
 
@@ -49,7 +52,6 @@ class _SubtaskInputState extends State<SubtaskInput> {
               shape: CircleBorder(),
             ),
             child: Checkbox(
-              activeColor: Colors.transparent,
               value: widget.finish,
               onChanged: (value) {
                 setState(() {
@@ -60,18 +62,12 @@ class _SubtaskInputState extends State<SubtaskInput> {
           ),
         ),
         Expanded(
-          child: TextFormField(
-            controller: widget.controller,
-            initialValue: widget.title,
-            maxLines: null,
+          child: FilledInput(
+            controller: _controller,
+            hintText: t.subtask_input.hint_text,
+            numLines: null,
             maxLength: 100,
             keyboardType: TextInputType.multiline,
-            decoration: InputDecoration(
-              counterText: '',
-              hintText: t.subtask_input.hint_text,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-            ),
             onChanged: (value) {
               setState(() {
                 _text = value;
@@ -82,14 +78,23 @@ class _SubtaskInputState extends State<SubtaskInput> {
         SizedBox(
           width: theme.spacings.x2,
         ),
-        if (widget.title != (widget.controller?.text ?? widget.title))
-          IconButton(
-            onPressed: () {
-              widget.onSaved(text: _text, checkBoxState: _checkBoxState,);
-            },
-            icon: Icon(
-              Icons.add_circle,
-              color: theme.palette.iconPrimary,
+        if (widget.title != _text)
+          Expanded(
+            child: IconButton(
+              onPressed: () {
+                widget.onSaved(
+                  text: _text,
+                  checkBoxState: _checkBoxState,
+                  controller: _controller,
+                );
+                setState(() {
+                  _text = '';
+                });
+              },
+              icon: Icon(
+                Icons.add_circle,
+                color: theme.palette.iconPrimary,
+              ),
             ),
           ),
       ],

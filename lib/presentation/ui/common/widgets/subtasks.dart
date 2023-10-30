@@ -1,59 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/domain.dart';
 import '../../../presentation.dart';
 
-class Subtasks extends StatefulWidget {
+class Subtasks extends StatelessWidget {
   const Subtasks({
     required this.subtasks,
     super.key,
   });
 
-  final List<Task> subtasks;
-
-  @override
-  State<Subtasks> createState() => _SubtasksState();
-}
-
-class _SubtasksState extends State<Subtasks> {
-  late final TextEditingController _controller;
-
-  @override
-  void initState() {
-    _controller = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  final List<Subtask> subtasks;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListView.builder(
-          itemCount: widget.subtasks.length,
+          itemCount: subtasks.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (
             context,
             index,
           ) {
-            final subtask = widget.subtasks[index];
-            return SubtaskInput(
-              finish: subtask.finish,
-              title: subtask.title,
-              onChanged: (value) {},
-              onSaved: () {},
+            final subtask = subtasks[index];
+            return Dismissible(
+              onDismissed: (onDismissed) {
+                context.read<TasksBloc>().add(
+                      ChangeSubtasksTaskEvent(
+                        subtask: null,
+                        index: index,
+                      ),
+                    );
+              },
+              key: Key(subtask.title),
+              child: SubtaskInput(
+                finish: subtask.finish,
+                title: subtask.title,
+                onSaved: ({
+                  required checkBoxState,
+                  required text,
+                  required controller,
+                }) {
+                  context.read<TasksBloc>().add(
+                        ChangeSubtasksTaskEvent(
+                          subtask: Subtask(
+                            finish: checkBoxState,
+                            title: text,
+                          ),
+                          index: index,
+                        ),
+                      );
+                },
+              ),
             );
           },
         ),
         SubtaskInput(
-          controller: _controller,
-          onSaved: () {},
+          onSaved: ({
+            required checkBoxState,
+            required text,
+            required controller,
+          }) {
+            context.read<TasksBloc>().add(
+                  ChangeSubtasksTaskEvent(
+                    subtask: Subtask(
+                      finish: checkBoxState,
+                      title: text,
+                    ),
+                  ),
+                );
+            controller.clear();
+          },
         ),
       ],
     );

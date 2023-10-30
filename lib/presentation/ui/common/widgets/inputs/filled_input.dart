@@ -5,7 +5,7 @@ import '../../../../../app/app.dart';
 
 class FilledInput extends StatelessWidget {
   const FilledInput({
-    this.labelText = '',
+    this.labelText,
     this.numLines,
     this.style,
     this.autoFocus = false,
@@ -25,7 +25,7 @@ class FilledInput extends StatelessWidget {
   });
 
   final String? initialValue;
-  final String labelText;
+  final String? labelText;
   final TextStyle? labelStyle;
   final TextStyle? style;
   final int? numLines;
@@ -48,6 +48,7 @@ class FilledInput extends StatelessWidget {
     final theme = Theme.of(context);
 
     return TextFormField(
+      textInputAction: TextInputAction.done,
       style: style,
       controller: controller,
       autofillHints: autofillHints,
@@ -63,6 +64,7 @@ class FilledInput extends StatelessWidget {
       maxLines: numLines,
       obscureText: obscureText,
       decoration: InputDecoration(
+        counterText: '',
         labelText: labelText,
         hintText: hintText,
         suffixIcon: suffixIcon,

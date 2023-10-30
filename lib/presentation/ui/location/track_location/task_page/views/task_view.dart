@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../app/app.dart';
 import '../../../../../presentation.dart';
+import '../../../../common/widgets/subtasks.dart';
 import '../widgets/widgets.dart';
 
 class TaskView extends StatelessWidget {
@@ -18,12 +19,23 @@ class TaskView extends StatelessWidget {
           horizontal: theme.spacings.x4,
           vertical: theme.spacings.x2,
         ),
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: const [
-            TitleInput(),
-            DescriptionsInput(),
-          ],
+        child: BlocBuilder<TasksBloc, TasksState>(
+          builder: (context, state) {
+            return ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: TitleInput(title: state.title,),),
+                    if (state.title.isNotEmpty)
+                      const AddTaskButton(),
+                  ],
+                ),
+                Subtasks(subtasks: state.subtasks,),
+                DescriptionsInput(title: state.description,),
+              ],
+            );
+          },
         ),
       ),
       bottomNavigationBar: const TaskBottomBar(),

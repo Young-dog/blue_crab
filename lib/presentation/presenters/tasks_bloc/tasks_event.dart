@@ -94,10 +94,9 @@ class ChangeTimeStartTaskEvent extends TasksEvent {
 
   @override
   List<Object?> get props => [
-    time,
-  ];
+        time,
+      ];
 }
-
 
 class ChangeDateEndTaskEvent extends TasksEvent {
   const ChangeDateEndTaskEvent({
@@ -108,10 +107,9 @@ class ChangeDateEndTaskEvent extends TasksEvent {
 
   @override
   List<Object?> get props => [
-    date,
-  ];
+        date,
+      ];
 }
-
 
 class ChangeTimeEndTaskEvent extends TasksEvent {
   const ChangeTimeEndTaskEvent({
@@ -122,7 +120,35 @@ class ChangeTimeEndTaskEvent extends TasksEvent {
 
   @override
   List<Object?> get props => [
-    time,
-  ];
+        time,
+      ];
 }
 
+class ChangeSubtasksTaskEvent extends TasksEvent {
+  const ChangeSubtasksTaskEvent({
+    required this.subtask,
+    this.index,
+  });
+
+  final int? index;
+  final Subtask? subtask;
+
+  @override
+  List<Object?> get props => [
+        subtask,
+        index,
+      ];
+}
+
+class AddTaskEvent extends TasksEvent {
+  const AddTaskEvent({
+    this.index,
+  });
+
+  final int? index;
+
+  @override
+  List<Object?> get props => [
+    index,
+  ];
+}

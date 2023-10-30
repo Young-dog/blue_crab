@@ -8,6 +8,7 @@ class TrackBox extends StatelessWidget {
     required this.title,
     required this.colorIcon,
     required this.onPressedAdd,
+    required this.child,
     this.countElements = 0,
     this.finishElements = 0,
     this.maxHeight,
@@ -21,15 +22,13 @@ class TrackBox extends StatelessWidget {
   final int finishElements;
   final int countElements;
   final void Function() onPressedAdd;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Container(
-      constraints: BoxConstraints(
-        maxHeight: maxHeight ?? theme.spacings.x20 * 2,
-      ),
       margin: EdgeInsets.symmetric(
         vertical: theme.spacings.x4,
         horizontal: theme.spacings.x6,
@@ -97,6 +96,7 @@ class TrackBox extends StatelessWidget {
               ),
             ],
           ),
+          child,
         ],
       ),
     );
