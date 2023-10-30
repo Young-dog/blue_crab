@@ -10,6 +10,12 @@ Future<void> initializeHive() async {
       TaskAdapter(),
     )
     ..registerAdapter(
+      SubtaskAdapter(),
+    )
+    ..registerAdapter(
+      TimeOfDayAdapter(),
+    )
+    ..registerAdapter(
       TagAdapter(),
     )
     ..registerAdapter(
@@ -23,5 +29,8 @@ Future<void> initializeHive() async {
     )
     ..registerAdapter(
       ColorAdapter(),
+    )
+    ..registerAdapter(
+      PriorityTaskAdapter(),
     );
 }

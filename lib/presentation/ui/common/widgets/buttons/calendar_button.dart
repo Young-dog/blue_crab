@@ -53,7 +53,7 @@ class CalendarButton extends StatelessWidget {
       context: ctx,
       builder: (BuildContext context) {
         return BlocProvider.value(
-          value: BlocProvider.of<TasksBloc>(ctx),
+          value: BlocProvider.of<TaskBloc>(ctx),
           child: SafeArea(
             child: Container(
               constraints: BoxConstraints(
@@ -81,8 +81,8 @@ class CalendarButton extends StatelessWidget {
       context: ctx,
       builder: (BuildContext context) {
         return BlocProvider.value(
-          value: BlocProvider.of<TasksBloc>(ctx),
-          child: TimeModel(
+          value: BlocProvider.of<TaskBloc>(ctx),
+          child: TimeModal(
             onChangedTime: onChangedTime,
             duration: time == null
                 ? null

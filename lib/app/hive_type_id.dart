@@ -12,4 +12,8 @@ class HiveTypeId {
   static const int color = 5;
 
   static const int subtask = 6;
+
+  static const int priorityTask = 7;
+
+  static const int timeOfDayAdapter = 8;
 }

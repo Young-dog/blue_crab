@@ -20,7 +20,7 @@ class TitleInput extends StatelessWidget {
     return FilledInput(
       initialValue: title,
       onChanged: (value) {
-        context.read<TasksBloc>().add(
+        context.read<TaskBloc>().add(
               ChangeTitleTaskEvent(
                 title: value,
               ),

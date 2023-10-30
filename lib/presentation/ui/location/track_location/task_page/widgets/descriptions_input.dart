@@ -16,7 +16,7 @@ class DescriptionsInput extends StatelessWidget {
     return FilledInput(
       initialValue: title,
       onChanged: (value) {
-        context.read<TasksBloc>().add(
+        context.read<TaskBloc>().add(
               ChangeDescriptionTaskEvent(
                 description: value,
               ),

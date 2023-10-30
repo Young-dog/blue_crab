@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import '../../../../../../app/app.dart';
 import '../../../../../../domain/domain.dart';
 import '../../../../../presentation.dart';
+import 'widgets.dart';
 
 class TaskBox extends StatelessWidget {
   const TaskBox({super.key});
@@ -24,48 +25,37 @@ class TaskBox extends StatelessWidget {
             )
             .toList();
 
-        return TrackBox(
-          finishElements: finishElements.length,
-          countElements: tasks.length,
-          icon: AssetNames.taskIcon,
-          title: t.track_page.tasks_box_title,
-          colorIcon: theme.palette.iconPrimary,
-          onPressedAdd: () {
-            context.router.push(
-              const TaskRoute(),
+        return BlocBuilder<TasksBloc, TasksState>(
+          builder: (context, state) {
+            return TrackBox(
+              finishElements: finishElements.length,
+              countElements: tasks.length,
+              icon: AssetNames.taskIcon,
+              title: t.track_page.tasks_box_title,
+              colorIcon: theme.palette.iconPrimary,
+              onPressedAdd: () {
+                context.router.push(
+                  TaskRoute(),
+                );
+              },
+              child: tasks.isNotEmpty
+                  ? ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: tasks.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        final task = tasks.values.elementAt(index);
+
+                        return TaskButton(
+                          task: task,
+                          index: index,
+                        );
+                      },
+                    )
+                  : Container(),
             );
           },
-          child: tasks.isNotEmpty
-              ? ListView.builder(
-            padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  itemCount: tasks.length,
-                  physics: const NeverScrollableScrollPhysics(),
-
-                  itemBuilder: (BuildContext context, int index) {
-                    final task = tasks.values.elementAt(index);
-
-                    return DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          theme.radius.x2,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            value: task.finish,
-                            onChanged: (value) {},
-                          ),
-                          Expanded(
-                            child: Text(task.title,),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                )
-              : Container(),
         );
       },
     );

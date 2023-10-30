@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/app.dart';
 
-class TimeModel extends StatefulWidget {
-  const TimeModel({
+class TimeModal extends StatefulWidget {
+  const TimeModal({
     required this.onChangedTime,
     required this.duration,
     super.key,
@@ -14,18 +14,19 @@ class TimeModel extends StatefulWidget {
   final Duration? duration;
 
   @override
-  State<TimeModel> createState() => _TimeModelState();
+  State<TimeModal> createState() => _TimeModalState();
 }
 
-class _TimeModelState extends State<TimeModel> {
+class _TimeModalState extends State<TimeModal> {
+
+  Duration _time = Duration(
+    hours: DateTime.now().hour,
+    minutes: DateTime.now().minute,
+  );
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
-    var time = Duration(
-      hours: DateTime.now().hour,
-      minutes: DateTime.now().minute,
-    );
 
     return Container(
       decoration: BoxDecoration(
@@ -59,11 +60,11 @@ class _TimeModelState extends State<TimeModel> {
             children: [
               CupertinoTimerPicker(
                 mode: CupertinoTimerPickerMode.hm,
-                initialTimerDuration: widget.duration ?? time,
+                initialTimerDuration: widget.duration ?? _time,
                 onTimerDurationChanged: (Duration newDuration) {
-                  setState(
-                    () => time = newDuration,
-                  );
+                  setState(() {
+                    _time = newDuration;
+                  });
                 },
               ),
               Row(
@@ -101,8 +102,8 @@ class _TimeModelState extends State<TimeModel> {
                       ),
                       onPressed: () {
                         final value = TimeOfDay(
-                          hour: time.inHours,
-                          minute: time.inMinutes.remainder(60),
+                          hour: _time.inHours,
+                          minute: _time.inMinutes.remainder(60),
                         );
                         widget.onChangedTime(
                           value,

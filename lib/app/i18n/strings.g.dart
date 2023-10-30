@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 30 (15 per locale)
+/// Strings: 34 (17 per locale)
 ///
-/// Built on 2023-10-26 at 15:31 UTC
+/// Built on 2023-10-30 at 12:56 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -156,6 +156,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	late final _StringsTaskPageEn task_page = _StringsTaskPageEn._(_root);
 	late final _StringsCalendarButtonEn calendar_button = _StringsCalendarButtonEn._(_root);
 	late final _StringsSubtaskInputEn subtask_input = _StringsSubtaskInputEn._(_root);
+	late final _StringsTaskButtonEn task_button = _StringsTaskButtonEn._(_root);
 }
 
 // Path: track_page
@@ -227,6 +228,17 @@ class _StringsSubtaskInputEn {
 	String get hint_text => 'Подзадача';
 }
 
+// Path: task_button
+class _StringsTaskButtonEn {
+	_StringsTaskButtonEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String tag_title({required Object tag}) => '# ${tag}';
+	String date_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+}
+
 // Path: <root>
 class _StringsRu implements _StringsEn {
 
@@ -258,6 +270,7 @@ class _StringsRu implements _StringsEn {
 	@override late final _StringsTaskPageRu task_page = _StringsTaskPageRu._(_root);
 	@override late final _StringsCalendarButtonRu calendar_button = _StringsCalendarButtonRu._(_root);
 	@override late final _StringsSubtaskInputRu subtask_input = _StringsSubtaskInputRu._(_root);
+	@override late final _StringsTaskButtonRu task_button = _StringsTaskButtonRu._(_root);
 }
 
 // Path: track_page
@@ -329,6 +342,17 @@ class _StringsSubtaskInputRu implements _StringsSubtaskInputEn {
 	@override String get hint_text => 'Подзадача';
 }
 
+// Path: task_button
+class _StringsTaskButtonRu implements _StringsTaskButtonEn {
+	_StringsTaskButtonRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String tag_title({required Object tag}) => '# ${tag}';
+	@override String date_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -350,6 +374,8 @@ extension on _StringsEn {
 			case 'calendar_button.time': return '+ Время';
 			case 'calendar_button.delete': return 'Удалить';
 			case 'subtask_input.hint_text': return 'Подзадача';
+			case 'task_button.tag_title': return ({required Object tag}) => '# ${tag}';
+			case 'task_button.date_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
 			default: return null;
 		}
 	}
@@ -373,6 +399,8 @@ extension on _StringsRu {
 			case 'calendar_button.time': return '+ Время';
 			case 'calendar_button.delete': return 'Удалить';
 			case 'subtask_input.hint_text': return 'Подзадача';
+			case 'task_button.tag_title': return ({required Object tag}) => '# ${tag}';
+			case 'task_button.date_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
 			default: return null;
 		}
 	}

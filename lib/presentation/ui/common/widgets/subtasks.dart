@@ -27,7 +27,7 @@ class Subtasks extends StatelessWidget {
             final subtask = subtasks[index];
             return Dismissible(
               onDismissed: (onDismissed) {
-                context.read<TasksBloc>().add(
+                context.read<TaskBloc>().add(
                       ChangeSubtasksTaskEvent(
                         subtask: null,
                         index: index,
@@ -43,7 +43,7 @@ class Subtasks extends StatelessWidget {
                   required text,
                   required controller,
                 }) {
-                  context.read<TasksBloc>().add(
+                  context.read<TaskBloc>().add(
                         ChangeSubtasksTaskEvent(
                           subtask: Subtask(
                             finish: checkBoxState,
@@ -63,7 +63,7 @@ class Subtasks extends StatelessWidget {
             required text,
             required controller,
           }) {
-            context.read<TasksBloc>().add(
+            context.read<TaskBloc>().add(
                   ChangeSubtasksTaskEvent(
                     subtask: Subtask(
                       finish: checkBoxState,

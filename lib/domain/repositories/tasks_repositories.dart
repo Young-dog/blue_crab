@@ -19,6 +19,15 @@ abstract class TasksRepository {
     required bool finish,
     int? index,
   });
+
+  Future<void> delTasks({
+    required int index,
+  });
+
+  Future<void> finishTasks({
+    required int index,
+    required bool finish,
+  });
 }
 
 class TasksRepositoryImpl extends TasksRepository {
@@ -58,6 +67,26 @@ class TasksRepositoryImpl extends TasksRepository {
     await _localeTasksDataSource.addTask(
       task: task,
       index: index,
+    );
+  }
+
+  @override
+  Future<void> delTasks({
+    required int index,
+  }) async {
+    await _localeTasksDataSource.delTasks(
+      index: index,
+    );
+  }
+
+  @override
+  Future<void> finishTasks({
+    required int index,
+    required bool finish,
+  }) async {
+    await _localeTasksDataSource.finishTasks(
+      index: index,
+      finish: finish,
     );
   }
 }

@@ -13,7 +13,7 @@ class TaskBottomBar extends StatelessWidget {
 
     final mq = MediaQuery.of(context);
 
-    return BlocBuilder<TasksBloc, TasksState>(
+    return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) {
         return SafeArea(
           child: SizedBox(
@@ -38,7 +38,7 @@ class TaskBottomBar extends StatelessWidget {
                     children: [
                       PriorityButton(
                         onChanged: (priority) {
-                          context.read<TasksBloc>().add(
+                          context.read<TaskBloc>().add(
                                 ChangePriorityTaskEvent(
                                   priority: priority,
                                 ),
@@ -57,14 +57,14 @@ class TaskBottomBar extends StatelessWidget {
                         date: state.dateStart,
                         time: state.timeStart,
                         onChangedTime: (TimeOfDay? time) {
-                          context.read<TasksBloc>().add(
+                          context.read<TaskBloc>().add(
                                 ChangeTimeStartTaskEvent(
                                   time: time,
                                 ),
                               );
                         },
                         onChangedDate: (DateTime? date) {
-                          context.read<TasksBloc>().add(
+                          context.read<TaskBloc>().add(
                                 ChangeDateStartTaskEvent(
                                   date: date,
                                 ),
@@ -84,14 +84,14 @@ class TaskBottomBar extends StatelessWidget {
                               date: state.dateEnd,
                               time: state.timeEnd,
                               onChangedTime: (TimeOfDay? time) {
-                                context.read<TasksBloc>().add(
+                                context.read<TaskBloc>().add(
                                       ChangeTimeEndTaskEvent(
                                         time: time,
                                       ),
                                     );
                               },
                               onChangedDate: (DateTime? date) {
-                                context.read<TasksBloc>().add(
+                                context.read<TaskBloc>().add(
                                       ChangeDateEndTaskEvent(
                                         date: date,
                                       ),

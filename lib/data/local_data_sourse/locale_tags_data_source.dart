@@ -40,7 +40,6 @@ class LocaleTagsDataSourceImpl extends LocaleTagsDataSource {
   Future<void> addTag({
     required Tag tag,
   }) async {
-    print('начал работу');
     await _tagsBox.add(
       tag,
     );

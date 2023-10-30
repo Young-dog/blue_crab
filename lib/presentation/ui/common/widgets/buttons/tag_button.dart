@@ -47,7 +47,7 @@ class TagButton extends StatelessWidget {
       context: ctx,
       builder: (context) {
           return BlocProvider.value(
-            value: BlocProvider.of<TasksBloc>(ctx),
+            value: BlocProvider.of<TaskBloc>(ctx),
             child: SafeArea(
               child: Container(
                 constraints: BoxConstraints(
@@ -214,7 +214,7 @@ class _TagsModalState extends State<_TagsModal> {
                         direction: DismissDirection.endToStart,
                         child: InkWell(
                           onTap: () {
-                            context.read<TasksBloc>().add(
+                            context.read<TaskBloc>().add(
                                   ChangeTagTaskEvent(
                                     tag: tag,
                                   ),

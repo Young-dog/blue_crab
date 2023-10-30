@@ -14,7 +14,7 @@ class TaskAppBar extends StatelessWidget implements PreferredSizeWidget{
 
     final t = AppLocaleUtils.findDeviceLocale();
 
-    return BlocBuilder<TasksBloc, TasksState>(
+    return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) {
         return AppBar(
           title: DropdownButton<TypeTask>(
@@ -39,7 +39,7 @@ class TaskAppBar extends StatelessWidget implements PreferredSizeWidget{
             )
                 .toList(),
             onChanged: (TypeTask? value) {
-              context.read<TasksBloc>().add(
+              context.read<TaskBloc>().add(
                 ChangeTypeTaskEvent(
                   type: value!,
                 ),

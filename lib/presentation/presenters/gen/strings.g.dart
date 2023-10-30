@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 30 (15 per locale)
+/// Strings: 28 (14 per locale)
 ///
-/// Built on 2023-10-30 at 07:13 UTC
+/// Built on 2023-10-26 at 14:29 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -155,7 +155,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	late final _StringsTaskTypeEn task_type = _StringsTaskTypeEn._(_root);
 	late final _StringsTaskPageEn task_page = _StringsTaskPageEn._(_root);
 	late final _StringsCalendarButtonEn calendar_button = _StringsCalendarButtonEn._(_root);
-	late final _StringsSubtaskInputEn subtask_input = _StringsSubtaskInputEn._(_root);
 }
 
 // Path: track_page
@@ -217,16 +216,6 @@ class _StringsCalendarButtonEn {
 	String get delete => 'Удалить';
 }
 
-// Path: subtask_input
-class _StringsSubtaskInputEn {
-	_StringsSubtaskInputEn._(this._root);
-
-	final _StringsEn _root; // ignore: unused_field
-
-	// Translations
-	String get hint_text => 'Подзадача';
-}
-
 // Path: <root>
 class _StringsRu implements _StringsEn {
 
@@ -257,7 +246,6 @@ class _StringsRu implements _StringsEn {
 	@override late final _StringsTaskTypeRu task_type = _StringsTaskTypeRu._(_root);
 	@override late final _StringsTaskPageRu task_page = _StringsTaskPageRu._(_root);
 	@override late final _StringsCalendarButtonRu calendar_button = _StringsCalendarButtonRu._(_root);
-	@override late final _StringsSubtaskInputRu subtask_input = _StringsSubtaskInputRu._(_root);
 }
 
 // Path: track_page
@@ -319,16 +307,6 @@ class _StringsCalendarButtonRu implements _StringsCalendarButtonEn {
 	@override String get delete => 'Удалить';
 }
 
-// Path: subtask_input
-class _StringsSubtaskInputRu implements _StringsSubtaskInputEn {
-	_StringsSubtaskInputRu._(this._root);
-
-	@override final _StringsRu _root; // ignore: unused_field
-
-	// Translations
-	@override String get hint_text => 'Подзадача';
-}
-
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -349,7 +327,6 @@ extension on _StringsEn {
 			case 'calendar_button.add': return 'Добавить';
 			case 'calendar_button.time': return '+ Время';
 			case 'calendar_button.delete': return 'Удалить';
-			case 'subtask_input.hint_text': return 'Подзадача';
 			default: return null;
 		}
 	}
@@ -372,7 +349,6 @@ extension on _StringsRu {
 			case 'calendar_button.add': return 'Добавить';
 			case 'calendar_button.time': return '+ Время';
 			case 'calendar_button.delete': return 'Удалить';
-			case 'subtask_input.hint_text': return 'Подзадача';
 			default: return null;
 		}
 	}

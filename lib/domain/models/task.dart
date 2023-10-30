@@ -52,6 +52,20 @@ class Task extends Equatable {
   @HiveField(9)
   final bool finish;
 
+  Task copyWith({bool? finish, List<Subtask>? subtasks}) {
+    return Task(
+    title: title,
+    description: description,
+    priority: priority,
+    dateStart: dateStart,
+    dateEnd: dateEnd,
+    timeEnd: timeEnd,
+    subtasks: subtasks ?? this.subtasks,
+    tag: tag,
+    finish: finish ?? this.finish,
+    );
+  }
+
   @override
   List<Object?> get props => [
     title,

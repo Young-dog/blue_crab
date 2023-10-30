@@ -52,7 +52,7 @@ class PriorityButton extends StatelessWidget {
             maxHeight: theme.spacings.x20 * 5,
           ),
           child: BlocProvider.value(
-            value: BlocProvider.of<TasksBloc>(ctx),
+            value: BlocProvider.of<TaskBloc>(ctx),
             child: _PriorityModal(
               priorities: priorities,
               onChanged: onChanged,

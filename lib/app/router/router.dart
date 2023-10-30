@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import '../../domain/domain.dart';
 import '../../presentation/presentation.dart';
 
 part 'router.gr.dart';

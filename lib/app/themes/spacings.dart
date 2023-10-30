@@ -14,7 +14,10 @@ class Spacings extends ThemeExtension<Spacings> {
     required this.x8,
     required this.x9,
     required this.x10,
+    required this.x11,
     required this.x12,
+    required this.x13,
+    required this.x14,
     required this.x15,
     required this.x16,
     required this.x17,
@@ -35,7 +38,10 @@ class Spacings extends ThemeExtension<Spacings> {
           x8: 24,
           x9: 27,
           x10: 30,
-          x12: 36,
+    x11: 33,
+    x12: 36,
+    x13: 39,
+    x14: 42,
           x15: 45,
           x16: 48,
           x17: 51,
@@ -56,7 +62,10 @@ class Spacings extends ThemeExtension<Spacings> {
           x8: 32,
           x9: 36,
           x10: 40,
-          x12: 48,
+    x11: 44,
+    x12: 48,
+    x13: 52,
+    x14: 56,
           x15: 60,
           x16: 64,
           x17: 68,
@@ -75,7 +84,10 @@ class Spacings extends ThemeExtension<Spacings> {
   final double x8;
   final double x9;
   final double x10;
+  final double x11;
   final double x12;
+  final double x13;
+  final double x14;
   final double x15;
   final double x16;
   final double x17;
@@ -95,7 +107,10 @@ class Spacings extends ThemeExtension<Spacings> {
     double? x8,
     double? x9,
     double? x10,
+    double? x11,
     double? x12,
+    double? x13,
+    double? x14,
     double? x15,
     double? x16,
     double? x17,
@@ -114,7 +129,10 @@ class Spacings extends ThemeExtension<Spacings> {
       x8: x8 ?? this.x8,
       x9: x9 ?? this.x9,
       x10: x10 ?? this.x10,
+      x11: x11 ?? this.x11,
       x12: x12 ?? this.x12,
+      x13: x13 ?? this.x13,
+      x14: x14 ?? this.x14,
       x15: x15 ?? this.x15,
       x16: x16 ?? this.x16,
       x17: x17 ?? this.x17,
@@ -141,7 +159,10 @@ class Spacings extends ThemeExtension<Spacings> {
       x8: lerpDouble(x8, other.x8, t)!,
       x9: lerpDouble(x9, other.x9, t)!,
       x10: lerpDouble(x10, other.x10, t)!,
+      x11: lerpDouble(x11, other.x11, t)!,
       x12: lerpDouble(x12, other.x12, t)!,
+      x13: lerpDouble(x13, other.x13, t)!,
+      x14: lerpDouble(x14, other.x14, t)!,
       x15: lerpDouble(x15, other.x15, t)!,
       x16: lerpDouble(x16, other.x16, t)!,
       x17: lerpDouble(x17, other.x17, t)!,

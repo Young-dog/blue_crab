@@ -20,6 +20,7 @@ class EventAdapter extends TypeAdapter<Event> {
       title: fields[0] as String,
       description: fields[1] as String,
       days: (fields[3] as List).cast<int>(),
+      subtasks: (fields[7] as List).cast<Subtask>(),
       tag: fields[6] as Tag?,
       priority: fields[2] as PriorityTask?,
       timeStart: fields[4] as TimeOfDay?,
@@ -30,7 +31,7 @@ class EventAdapter extends TypeAdapter<Event> {
   @override
   void write(BinaryWriter writer, Event obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class EventAdapter extends TypeAdapter<Event> {
       ..writeByte(5)
       ..write(obj.timeEnd)
       ..writeByte(6)
-      ..write(obj.tag);
+      ..write(obj.tag)
+      ..writeByte(7)
+      ..write(obj.subtasks);
   }
 
   @override

@@ -25,5 +25,9 @@
   },
   "subtask_input" : {
     "hint_text" : "Подзадача"
+  },
+  "task_button" : {
+    "tag_title" : "# $tag",
+    "date_tittle" : "$hours:$minutes"
   }
 }

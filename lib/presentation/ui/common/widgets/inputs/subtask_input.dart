@@ -52,17 +52,22 @@ class _SubtaskInputState extends State<SubtaskInput> {
               shape: CircleBorder(),
             ),
             child: Checkbox(
-              value: widget.finish,
+              value: _checkBoxState,
               onChanged: (value) {
-                setState(() {
-                  _checkBoxState = value ?? false;
-                });
+                if (_controller.text.isNotEmpty) {
+                  setState(() {
+                    _checkBoxState = value ?? false;
+                  });
+                }
               },
             ),
           ),
         ),
         Expanded(
           child: FilledInput(
+            style: theme.textTheme.bodyMedium!.copyWith(
+              decoration: _checkBoxState ? TextDecoration.lineThrough : null,
+            ),
             controller: _controller,
             hintText: t.subtask_input.hint_text,
             numLines: null,

@@ -12,6 +12,7 @@ class Event extends Equatable {
     required this.title,
     required this.description,
     required this.days,
+    required this.subtasks,
     this.tag,
     this.priority,
     this.timeStart,
@@ -39,6 +40,9 @@ class Event extends Equatable {
   @HiveField(6)
   final Tag? tag;
 
+  @HiveField(7)
+  final List<Subtask> subtasks;
+
   @override
   List<Object?> get props => [
     title,
@@ -48,5 +52,6 @@ class Event extends Equatable {
     priority,
     timeStart,
     timeEnd,
+    subtasks,
   ];
 }

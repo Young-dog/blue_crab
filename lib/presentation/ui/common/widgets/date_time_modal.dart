@@ -225,7 +225,7 @@ class _BottomDateTimePickerState extends State<DateTimeModal> {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
-        return TimeModel(
+        return TimeModal(
           onChangedTime: widget.onChangedTime,
           duration: _duration,
         );

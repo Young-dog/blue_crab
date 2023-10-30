@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../app/app.dart';
 import '../../../../../presentation.dart';
-import '../../../../common/widgets/subtasks.dart';
 import '../widgets/widgets.dart';
 
 class TaskView extends StatelessWidget {
-  const TaskView({super.key});
+  const TaskView({
+    this.index,
+    super.key,
+  });
+
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +23,30 @@ class TaskView extends StatelessWidget {
           horizontal: theme.spacings.x4,
           vertical: theme.spacings.x2,
         ),
-        child: BlocBuilder<TasksBloc, TasksState>(
+        child: BlocBuilder<TaskBloc, TaskState>(
           builder: (context, state) {
             return ListView(
               physics: const BouncingScrollPhysics(),
               children: [
                 Row(
                   children: [
-                    Expanded(child: TitleInput(title: state.title,),),
+                    Expanded(
+                      child: TitleInput(
+                        title: state.title,
+                      ),
+                    ),
                     if (state.title.isNotEmpty)
-                      const AddTaskButton(),
+                      AddTaskButton(
+                        index: index,
+                      ),
                   ],
                 ),
-                Subtasks(subtasks: state.subtasks,),
-                DescriptionsInput(title: state.description,),
+                Subtasks(
+                  subtasks: state.subtasks,
+                ),
+                DescriptionsInput(
+                  title: state.description,
+                ),
               ],
             );
           },

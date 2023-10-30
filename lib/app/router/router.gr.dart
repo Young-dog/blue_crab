@@ -40,9 +40,16 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     TaskRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<TaskRouteArgs>(orElse: () => const TaskRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const TaskPage(),
+        child: TaskPage(
+          task: args.task,
+          event: args.event,
+          index: args.index,
+          key: args.key,
+        ),
       );
     },
     TrackRoute.name: (routeData) {
@@ -112,16 +119,49 @@ class SettingsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TaskPage]
-class TaskRoute extends PageRouteInfo<void> {
-  const TaskRoute({List<PageRouteInfo>? children})
-      : super(
+class TaskRoute extends PageRouteInfo<TaskRouteArgs> {
+  TaskRoute({
+    Task? task,
+    Event? event,
+    int? index,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           TaskRoute.name,
+          args: TaskRouteArgs(
+            task: task,
+            event: event,
+            index: index,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'TaskRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<TaskRouteArgs> page = PageInfo<TaskRouteArgs>(name);
+}
+
+class TaskRouteArgs {
+  const TaskRouteArgs({
+    this.task,
+    this.event,
+    this.index,
+    this.key,
+  });
+
+  final Task? task;
+
+  final Event? event;
+
+  final int? index;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'TaskRouteArgs{task: $task, event: $event, index: $index, key: $key}';
+  }
 }
 
 /// generated route for

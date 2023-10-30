@@ -9,6 +9,15 @@ abstract class LocaleTasksDataSource {
     required Task task,
     int? index,
   });
+
+  Future<void> delTasks({
+    required int index,
+  });
+
+  Future<void> finishTasks({
+    required int index,
+    required bool finish,
+  });
 }
 
 class LocaleTasksDataSourceImpl extends LocaleTasksDataSource {
@@ -42,10 +51,52 @@ class LocaleTasksDataSourceImpl extends LocaleTasksDataSource {
         task,
       );
     } else {
+      Task? updateTask;
+
+      if (task.finish) {
+        final subtasks = task.subtasks.map((e) {
+          final sub = e.copyWith(finish: true);
+          return sub;
+        }).toList();
+        updateTask = task.copyWith(
+          subtasks: subtasks,
+        );
+      }
+
       await _taskBox.putAt(
         index,
-        task,
+        updateTask ?? task,
       );
     }
+  }
+
+  @override
+  Future<void> delTasks({
+    required int index,
+  }) async {
+    await _taskBox.deleteAt(index);
+  }
+
+  @override
+  Future<void> finishTasks({
+    required int index,
+    required bool finish,
+  }) async {
+    final task = _taskBox.values.elementAt(index);
+
+    final subtasks = task.subtasks.map((e) {
+      final sub = e.copyWith(finish: finish);
+      return sub;
+    }).toList();
+
+    final updateTask = task.copyWith(
+      finish: finish,
+      subtasks: subtasks,
+    );
+
+    await _taskBox.putAt(
+      index,
+      updateTask,
+    );
   }
 }
