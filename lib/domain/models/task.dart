@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -8,75 +7,61 @@ import '../domain.dart';
 part 'task.g.dart';
 
 @HiveType(typeId: HiveTypeId.task)
-class Task extends Equatable {
+class Task extends TaskModel {
   const Task({
-    required this.title,
-    required this.description,
-    required this.subtasks,
-    this.tag,
-    this.priority,
-    this.dateStart,
-    this.dateEnd,
-    this.timeStart,
-    this.timeEnd,
-    this.finish = false,
+    required super.type,
+    required super.title,
+    required super.description,
+    required super.priority,
+    required super.subtasks,
+    required super.tag,
+    required super.dateStart,
+    required super.timeStart,
+    required this.dateEnd,
+    required this.timeEnd,
+    required this.finish,
   });
 
-  @HiveField(0)
-  final String title;
-
-  @HiveField(1)
-  final String description;
-
-  @HiveField(2)
-  final PriorityTask? priority;
-
-  @HiveField(3)
-  final DateTime? dateStart;
-
-  @HiveField(4)
+  @HiveField(8)
   final DateTime? dateEnd;
 
-  @HiveField(5)
-  final TimeOfDay? timeStart;
-
-  @HiveField(6)
+  @HiveField(9)
   final TimeOfDay? timeEnd;
 
-  @HiveField(7)
-  final List<Subtask> subtasks;
-
-  @HiveField(8)
-  final Tag? tag;
-
-  @HiveField(9)
+  @HiveField(10)
   final bool finish;
 
-  Task copyWith({bool? finish, List<Subtask>? subtasks}) {
+  Task copyWith({
+    bool? finish,
+    List<Subtask>? subtasks,
+  }) {
     return Task(
-    title: title,
-    description: description,
-    priority: priority,
-    dateStart: dateStart,
-    dateEnd: dateEnd,
-    timeEnd: timeEnd,
-    subtasks: subtasks ?? this.subtasks,
-    tag: tag,
-    finish: finish ?? this.finish,
+      type: type,
+      title: title,
+      description: description,
+      priority: priority,
+      dateStart: dateStart,
+      dateEnd: dateEnd,
+      timeStart: timeStart,
+      timeEnd: timeEnd,
+      subtasks: subtasks ?? this.subtasks,
+      tag: tag,
+      finish: finish ?? this.finish,
     );
   }
 
   @override
   List<Object?> get props => [
-    title,
-    description,
-    subtasks,
-    tag,
-    priority,
-    dateStart,
-    dateEnd,
-    timeStart,
-    timeEnd,
-    finish,
-  ];
+        type,
+        title,
+        description,
+        subtasks,
+        tag,
+        priority,
+        dateStart,
+        timeStart,
+        dateEnd,
+        timeEnd,
+        finish,
+      ];
 }

@@ -44,6 +44,11 @@ Future<void> _registerDataSources() async {
       () async => LocaleTasksDataSourceImpl.create(
         hive: _getIt(),
       ),
+    )
+    ..registerSingletonAsync<LocaleEventsDataSource>(
+      () async => LocaleEventsDataSourceImpl.create(
+        hive: _getIt(),
+      ),
     );
 }
 
@@ -54,15 +59,26 @@ Future<void> _registerRepositories() async {
         localeTagsDataSource: _getIt(),
       ),
     )
-    ..registerLazySingleton<TasksRepository>(
-      () => TasksRepositoryImpl(
+    ..registerSingletonAsync<TasksRepository>(
+      () async => TasksRepositoryImpl.create(
         localeTasksDataSource: _getIt(),
       ),
+      dependsOn: [
+        LocaleTasksDataSource,
+      ],
+    )
+    ..registerSingletonAsync<EventsRepository>(
+      () async => EventsRepositoryImpl.create(
+        localeEventsDataSource: _getIt(),
+      ),
+      dependsOn: [
+        LocaleEventsDataSource,
+      ],
     );
 }
 
 Future<void> _registerBlocs() async {
   _getIt.registerFactory(
-    TrackBloc.new,
-  );
+      TrackBloc.new,
+    );
 }

@@ -1,5 +1,7 @@
 class HiveBoxes {
-  static const String tagBox = 'tag_box';
+  static const String tagsBox = 'tags_box';
 
-  static const String taskBox = 'task_box';
+  static const String tasksBox = 'tasks_box';
+
+  static const String eventsBox = 'events_box';
 }

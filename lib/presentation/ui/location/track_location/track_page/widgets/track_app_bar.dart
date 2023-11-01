@@ -85,6 +85,12 @@ class TrackAppBar extends StatelessWidget {
                     selectedDay: selectedDay,
                   ),
                 );
+            context.read<TasksBloc>().add(
+              ChangeDateEvent(
+                date: selectedDay,
+              ),
+            );
+
             context.read<TrackBloc>().add(
                   ChangeFocusedDayEvent(
                     focusedDay: focusedDay,

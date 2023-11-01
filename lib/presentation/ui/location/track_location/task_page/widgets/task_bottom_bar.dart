@@ -52,7 +52,9 @@ class TaskBottomBar extends StatelessWidget {
                       ),
                       const NotifyButton(),
                       if (state.type == TypeTask.event)
-                        RepeatButton(days: state.days,),
+                        RepeatButton(
+                          days: state.days,
+                        ),
                       CalendarButton(
                         date: state.dateStart,
                         time: state.timeStart,
@@ -70,15 +72,15 @@ class TaskBottomBar extends StatelessWidget {
                                 ),
                               );
                         },
-                        type: state.type,
+                        days: state.days,
                       ),
                       if (state.type != TypeTask.event &&
                           state.dateStart != null)
                         Row(
                           children: [
-                             Icon(
+                            Icon(
                               Icons.navigate_next,
-                               color: theme.palette.iconPrimary,
+                              color: theme.palette.iconPrimary,
                             ),
                             CalendarButton(
                               date: state.dateEnd,
@@ -97,7 +99,6 @@ class TaskBottomBar extends StatelessWidget {
                                       ),
                                     );
                               },
-                              type: state.type,
                             ),
                           ],
                         ),

@@ -45,6 +45,7 @@ class TaskState extends Equatable {
     required this.subtasks,
     required this.days,
     required this.finish,
+    required this.finishDates,
   });
 
   TaskState.initial({
@@ -60,13 +61,15 @@ class TaskState extends Equatable {
     List<Subtask>? subtasks,
     List<int>? days,
     bool? finish,
+    List<DateTime>? finishDates,
   })  : status = TaskStatus.initial,
         type = type ?? TypeTask.task,
         title = title ?? '',
         description = description ?? '',
         subtasks = subtasks ?? <Subtask>[],
         days = days ?? <int>[],
-        finish = finish ?? false;
+        finish = finish ?? false,
+        finishDates = finishDates ?? <DateTime>[];
 
   final TaskStatus status;
   final TypeTask type;
@@ -81,6 +84,7 @@ class TaskState extends Equatable {
   final List<Subtask> subtasks;
   final List<int> days;
   final bool finish;
+  final List<DateTime> finishDates;
 
   TaskState copyWith({
     TaskStatus? status,
@@ -96,6 +100,7 @@ class TaskState extends Equatable {
     List<Subtask>? subtasks,
     List<int>? days,
     bool? finish,
+    List<DateTime>? finishDates,
   }) {
     return TaskState(
       status: status ?? this.status,
@@ -113,10 +118,10 @@ class TaskState extends Equatable {
           ((status?.isDelDateEnd ?? false) || (status?.isDelDateFirst ?? false))
               ? null
               : dateEnd ?? this.dateEnd,
-      timeStart:
-          ((status?.isDelTimeFirst ?? false) || (status?.isDelDateFirst ?? false))
-              ? null
-              : timeStart ?? this.timeStart,
+      timeStart: ((status?.isDelTimeFirst ?? false) ||
+              (status?.isDelDateFirst ?? false))
+          ? null
+          : timeStart ?? this.timeStart,
       timeEnd: ((status?.isDelTimeEnd ?? false) ||
               (status?.isDelDateEnd ?? false) ||
               (status?.isDelDateFirst ?? false))
@@ -125,6 +130,7 @@ class TaskState extends Equatable {
       subtasks: subtasks ?? this.subtasks,
       days: days ?? this.days,
       finish: finish ?? this.finish,
+      finishDates: finishDates ?? this.finishDates,
     );
   }
 
@@ -143,5 +149,6 @@ class TaskState extends Equatable {
         subtasks,
         days,
         finish,
+        finishDates,
       ];
 }

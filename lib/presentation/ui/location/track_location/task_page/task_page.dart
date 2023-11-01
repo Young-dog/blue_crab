@@ -10,50 +10,60 @@ import 'views/views.dart';
 class TaskPage extends StatelessWidget {
   const TaskPage({
     this.task,
-    this.event,
     this.index,
     super.key,
   });
 
-  final Task? task;
-
+  final TaskModel? task;
   final int? index;
-
-  final Event? event;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        if (event != null ) {
+        if (task?.type == TypeTask.task) {
+          final taskM = task as Task;
           return TaskBloc(
-            type: TypeTask.event,
-            title: event?.title,
-            description: event?.description,
-            priority: event?.priority,
-            tag: event?.tag,
-            days: event?.days,
-            timeStart: event?.timeStart,
-            timeEnd: event?.timeEnd,
-            subtasks: event?.subtasks,
+            type: taskM.type,
+            title: taskM.title,
+            description: taskM.description,
+            priority: taskM.priority,
+            tag: taskM.tag,
+            dateStart: taskM.dateStart,
+            dateEnd: taskM.dateEnd,
+            timeStart: taskM.timeStart,
+            timeEnd: taskM.timeEnd,
+            subtasks: taskM.subtasks,
+            finish: taskM.finish,
             tasksRepository: GetIt.instance<TasksRepository>(),
+            eventsRepository: GetIt.instance<EventsRepository>(),
+          );
+        } else if (task?.type == TypeTask.event) {
+          final event = task as Event;
+          return TaskBloc(
+            type: event.type,
+            title: event.title,
+            description: event.description,
+            priority: event.priority,
+            tag: event.tag,
+            dateStart: event.dateStart,
+            timeStart: event.timeStart,
+            subtasks: event.subtasks,
+            days: event.days,
+            finishDates: event.finishDates,
+            tasksRepository: GetIt.instance<TasksRepository>(),
+            eventsRepository: GetIt.instance<EventsRepository>(),
+          );
+        } else {
+          return TaskBloc(
+            tasksRepository: GetIt.instance<TasksRepository>(),
+            eventsRepository: GetIt.instance<EventsRepository>(),
           );
         }
-        return TaskBloc(
-          title: task?.title,
-          description: task?.description,
-          priority: task?.priority,
-          tag: task?.tag,
-          dateStart: task?.dateStart,
-          dateEnd: task?.dateEnd,
-          timeStart: task?.timeStart,
-          timeEnd: task?.timeEnd,
-          subtasks: task?.subtasks,
-          finish: task?.finish,
-          tasksRepository: GetIt.instance<TasksRepository>(),
-        );
       },
-      child: TaskView(index: index,),
+      child: TaskView(
+        index: index,
+      ),
     );
   }
 }

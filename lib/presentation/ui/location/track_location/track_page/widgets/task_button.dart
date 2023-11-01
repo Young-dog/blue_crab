@@ -10,10 +10,13 @@ class TaskButton extends StatefulWidget {
   const TaskButton({
     required this.task,
     required this.index,
+    required this.finish,
     super.key,
   });
 
-  final Task task;
+  final TaskModel task;
+
+  final bool finish;
 
   final int index;
 
@@ -23,6 +26,20 @@ class TaskButton extends StatefulWidget {
 
 class _TaskButtonState extends State<TaskButton> {
   double _xOffset = 0.0;
+
+  Task? task;
+
+  Event? event;
+
+  @override
+  void initState() {
+    if (widget.task.type == TypeTask.event) {
+      event = widget.task as Event;
+    } else {
+      task = widget.task as Task;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +55,14 @@ class _TaskButtonState extends State<TaskButton> {
         if (_xOffset < -25) {
           context.read<TasksBloc>().add(
                 DelTasksEvent(
-                  index: widget.index,
+                  task: widget.task, type: widget.task.type,
                 ),
               );
         } else if (_xOffset > 25) {
           context.read<TasksBloc>().add(
                 FinishTaskEvent(
-                  finish: !widget.task.finish,
-                  index: widget.index,
+                  type: widget.task.type,
+                  task: widget.task,
                 ),
               );
         }
@@ -95,12 +112,11 @@ class _TaskButtonState extends State<TaskButton> {
                             shape: CircleBorder(),
                           ),
                           child: Checkbox(
-                            value: widget.task.finish,
+                            value: widget.finish,
                             onChanged: (value) {
                               context.read<TasksBloc>().add(
                                     FinishTaskEvent(
-                                      index: widget.index,
-                                      finish: value ?? false,
+                                      task: widget.task,type: widget.task.type,
                                     ),
                                   );
                             },
@@ -111,7 +127,8 @@ class _TaskButtonState extends State<TaskButton> {
                         child: Text(
                           widget.task.title,
                           style: theme.textTheme.titleSmall!.copyWith(
-                            decoration: widget.task.finish
+                            color: widget.task.type == TypeTask.event ? theme.palette.other.low : null,
+                            decoration: widget.finish
                                 ? TextDecoration.lineThrough
                                 : null,
                           ),
@@ -132,19 +149,21 @@ class _TaskButtonState extends State<TaskButton> {
                         TagPin(
                           tag: widget.task.tag!,
                         ),
+                      if(event?.days.isNotEmpty ?? false)
+                        const RepeatPin(),
                       if (widget.task.timeStart != null)
                         TimePin(
                           time: widget.task.timeStart!,
                         ),
-                      if (widget.task.timeEnd != null &&
-                          widget.task.timeStart != null)
+                      if (task?.timeEnd != null &&
+                          task?.timeStart != null)
                         Icon(
                           Icons.navigate_next,
                           color: theme.palette.iconPrimary,
                         ),
-                      if (widget.task.timeEnd != null)
+                      if (task?.timeEnd != null)
                         TimePin(
-                          time: widget.task.timeEnd!,
+                          time: task!.timeEnd!,
                         ),
                     ],
                   ),

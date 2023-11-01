@@ -1,57 +1,63 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import '../../app/app.dart';
 import '../domain.dart';
 
 part 'event.g.dart';
 
-@HiveType(typeId: HiveTypeId.event)
-class Event extends Equatable {
+@HiveType(
+  typeId: HiveTypeId.event,
+)
+class Event extends TaskModel {
   const Event({
-    required this.title,
-    required this.description,
+    required super.type,
+    required super.title,
+    required super.description,
+    required super.priority,
+    required super.subtasks,
+    required super.tag,
+    required super.dateStart,
+    required super.timeStart,
     required this.days,
-    required this.subtasks,
-    this.tag,
-    this.priority,
-    this.timeStart,
-    this.timeEnd,
+    required this.finishDates,
   });
 
-  @HiveField(0)
-  final String title;
-
-  @HiveField(1)
-  final String description;
-
-  @HiveField(2)
-  final PriorityTask? priority;
-
-  @HiveField(3)
+  @HiveField(8)
   final List<int> days;
 
-  @HiveField(4)
-  final TimeOfDay? timeStart;
+  @HiveField(9)
+  final List<DateTime> finishDates;
 
-  @HiveField(5)
-  final TimeOfDay? timeEnd;
-
-  @HiveField(6)
-  final Tag? tag;
-
-  @HiveField(7)
-  final List<Subtask> subtasks;
+  Event copyWith({
+    List<Subtask>? subtasks,
+    List<DateTime>? finishDates,
+  }) {
+    return Event(
+      type: type,
+      title: title,
+      description: description,
+      priority: priority,
+      subtasks: subtasks ?? this.subtasks,
+      tag: tag,
+      dateStart: dateStart,
+      timeStart: timeStart,
+      days: days,
+      finishDates: finishDates ?? this.finishDates,
+    );
+  }
 
   @override
   List<Object?> get props => [
-    title,
-    description,
-    days,
-    tag,
-    priority,
-    timeStart,
-    timeEnd,
-    subtasks,
-  ];
+        type,
+        title,
+        description,
+        priority,
+        subtasks,
+        tag,
+        dateStart,
+        timeStart,
+        days,
+        finishDates,
+      ];
 }

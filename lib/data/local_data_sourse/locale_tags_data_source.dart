@@ -15,7 +15,7 @@ abstract class LocaleTagsDataSource {
   Future<List<Tag>> initTags();
 }
 
-class LocaleTagsDataSourceImpl extends LocaleTagsDataSource {
+class LocaleTagsDataSourceImpl implements LocaleTagsDataSource {
   const LocaleTagsDataSourceImpl._internal({
     required Box<Tag> tagsBox,
   }) : _tagsBox = tagsBox;
@@ -26,7 +26,7 @@ class LocaleTagsDataSourceImpl extends LocaleTagsDataSource {
     required HiveInterface hive,
   }) async {
     final tagsBox = await hive.openBox<Tag>(
-      HiveBoxes.tagBox,
+      HiveBoxes.tagsBox,
     );
 
     final localeTagDataSource = LocaleTagsDataSourceImpl._internal(

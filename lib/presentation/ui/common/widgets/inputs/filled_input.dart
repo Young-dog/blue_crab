@@ -91,7 +91,7 @@ class FilledInput extends StatelessWidget {
           color: theme.palette.textSecondary,
         ),
         contentPadding: EdgeInsets.symmetric(
-          vertical: theme.spacings.x2,
+          vertical: theme.spacings.x3,
         ),
       ),
     );

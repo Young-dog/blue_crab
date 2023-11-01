@@ -17,23 +17,30 @@ class TaskAdapter extends TypeAdapter<Task> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Task(
+      type: fields[5] as TypeTask,
       title: fields[0] as String,
       description: fields[1] as String,
-      subtasks: (fields[7] as List).cast<Subtask>(),
-      tag: fields[8] as Tag?,
       priority: fields[2] as PriorityTask?,
-      dateStart: fields[3] as DateTime?,
-      dateEnd: fields[4] as DateTime?,
-      timeStart: fields[5] as TimeOfDay?,
-      timeEnd: fields[6] as TimeOfDay?,
-      finish: fields[9] as bool,
+      subtasks: (fields[3] as List).cast<Subtask>(),
+      tag: fields[4] as Tag?,
+      dateStart: fields[6] as DateTime?,
+      timeStart: fields[7] as TimeOfDay?,
+      dateEnd: fields[8] as DateTime?,
+      timeEnd: fields[9] as TimeOfDay?,
+      finish: fields[10] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Task obj) {
     writer
+      ..writeByte(11)
+      ..writeByte(8)
+      ..write(obj.dateEnd)
+      ..writeByte(9)
+      ..write(obj.timeEnd)
       ..writeByte(10)
+      ..write(obj.finish)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -41,19 +48,15 @@ class TaskAdapter extends TypeAdapter<Task> {
       ..writeByte(2)
       ..write(obj.priority)
       ..writeByte(3)
-      ..write(obj.dateStart)
-      ..writeByte(4)
-      ..write(obj.dateEnd)
-      ..writeByte(5)
-      ..write(obj.timeStart)
-      ..writeByte(6)
-      ..write(obj.timeEnd)
-      ..writeByte(7)
       ..write(obj.subtasks)
-      ..writeByte(8)
+      ..writeByte(4)
       ..write(obj.tag)
-      ..writeByte(9)
-      ..write(obj.finish);
+      ..writeByte(5)
+      ..write(obj.type)
+      ..writeByte(6)
+      ..write(obj.dateStart)
+      ..writeByte(7)
+      ..write(obj.timeStart);
   }
 
   @override

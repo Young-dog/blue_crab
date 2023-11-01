@@ -9,30 +9,64 @@ abstract class TasksEvent extends Equatable {
 
 class DelTasksEvent extends TasksEvent {
   const DelTasksEvent({
-    required this.index,
+    required this.task,
+    required this.type,
   });
 
-  final int index;
+  final TypeTask type;
+
+  final TaskModel task;
 
   @override
   List<Object?> get props => [
-        index,
+        task,
+        type,
+      ];
+}
+
+class ChangeTasksEvent extends TasksEvent {
+  const ChangeTasksEvent({
+    this.tasks,
+    this.events,
+  });
+
+  final List<Event>? events;
+
+  final List<Task>? tasks;
+
+  @override
+  List<Object?> get props => [
+        tasks,
+        events,
+      ];
+}
+
+class ChangeDateEvent extends TasksEvent {
+  const ChangeDateEvent({
+    required this.date,
+  });
+
+  final DateTime date;
+
+  @override
+  List<Object?> get props => [
+        date,
       ];
 }
 
 class FinishTaskEvent extends TasksEvent {
   const FinishTaskEvent({
-    required this.finish,
-    required this.index,
+    required this.task,
+    required this.type,
   });
 
-  final bool finish;
+  final TypeTask type;
 
-  final int index;
+  final TaskModel task;
 
   @override
   List<Object?> get props => [
-        finish,
-        index,
+        task,
+        type,
       ];
 }

@@ -77,7 +77,7 @@ class _TagsModal extends StatefulWidget {
 class _TagsModalState extends State<_TagsModal> {
   late final TextEditingController _controller;
 
-  final _tags = Hive.box<Tag>(HiveBoxes.tagBox);
+  final _tags = Hive.box<Tag>(HiveBoxes.tagsBox);
 
   @override
   void initState() {
@@ -242,9 +242,9 @@ class _TagsModalState extends State<_TagsModal> {
                               ],
                             ),
                             child: Text(
-                              '# ${tag.title}',
+                              t.task_button.tag_title(tag: tag.title),
                               style: theme.textTheme.bodyMedium!.copyWith(
-                                color: tag.color,
+                                color: theme.palette.textPrimary,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),

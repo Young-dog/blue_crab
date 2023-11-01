@@ -11,6 +11,7 @@ part 'task_state.dart';
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc({
     required TasksRepository tasksRepository,
+    required EventsRepository eventsRepository,
     TypeTask? type,
     String? title,
     String? description,
@@ -23,9 +24,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     List<Subtask>? subtasks,
     List<int>? days,
     bool? finish,
+    List<DateTime>? finishDates,
   })  : _tasksRepository = tasksRepository,
+        _eventsRepository = eventsRepository,
         super(
           TaskState.initial(
+            finishDates: finishDates,
             type: type,
             title: title,
             description: description,
@@ -51,9 +55,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<ChangeTimeEndTaskEvent>(_onChangeTimeEndTask);
     on<ChangeSubtasksTaskEvent>(_onChangeSubtasksTasks);
     on<AddTaskEvent>(_onAddTask);
+    on<ChangeDaysTaskEvent>(_onChangeDaysTask);
   }
 
   final TasksRepository _tasksRepository;
+
+  final EventsRepository _eventsRepository;
 
   void _onChangeTypeTask(
     ChangeTypeTaskEvent event,
@@ -237,23 +244,53 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     );
   }
 
+  void _onChangeDaysTask(
+    ChangeDaysTaskEvent event,
+    Emitter<TaskState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        status: TaskStatus.changeSubtask,
+      ),
+    );
+
+    emit(
+      state.copyWith(
+        status: TaskStatus.success,
+        days: event.days,
+      ),
+    );
+  }
+
   Future<void> _onAddTask(
     AddTaskEvent event,
     Emitter<TaskState> emit,
   ) async {
     if (state.type == TypeTask.task) {
       await _tasksRepository.addTask(
+        type: state.type,
         title: state.title,
         description: state.description,
         priority: state.priority,
         dateStart: state.dateStart,
-        dateEnd: state.dateEnd,
+        dateEnd: state.type == TypeTask.event ? null : state.dateEnd,
         timeStart: state.timeStart,
-        timeEnd: state.timeEnd,
+        timeEnd: state.type == TypeTask.event ? null : state.timeEnd,
         subtasks: state.subtasks,
         tag: state.tag,
         finish: state.finish,
-        index: event.index,
+      );
+    } else {
+      await _eventsRepository.addEvent(
+        title: state.title,
+        description: state.description,
+        priority: state.priority,
+        subtasks: state.subtasks,
+        tag: state.tag,
+        dateStart: state.days.isEmpty ? state.dateStart : null,
+        timeStart: state.timeStart,
+        days: state.days,
+        finishDates: state.finishDates, type: state.type,
       );
     }
   }

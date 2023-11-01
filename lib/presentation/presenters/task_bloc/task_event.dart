@@ -140,6 +140,19 @@ class ChangeSubtasksTaskEvent extends TaskEvent {
       ];
 }
 
+class ChangeDaysTaskEvent extends TaskEvent {
+  const ChangeDaysTaskEvent({
+    required this.days,
+  });
+
+  final List<int> days;
+
+  @override
+  List<Object?> get props => [
+        days,
+      ];
+}
+
 class AddTaskEvent extends TaskEvent {
   const AddTaskEvent({
     this.index,
@@ -149,6 +162,6 @@ class AddTaskEvent extends TaskEvent {
 
   @override
   List<Object?> get props => [
-    index,
-  ];
+        index,
+      ];
 }

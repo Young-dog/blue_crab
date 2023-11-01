@@ -8,7 +8,7 @@ part of 'event.dart';
 
 class EventAdapter extends TypeAdapter<Event> {
   @override
-  final int typeId = 2;
+  final int typeId = 9;
 
   @override
   Event read(BinaryReader reader) {
@@ -17,21 +17,27 @@ class EventAdapter extends TypeAdapter<Event> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Event(
+      type: fields[5] as TypeTask,
       title: fields[0] as String,
       description: fields[1] as String,
-      days: (fields[3] as List).cast<int>(),
-      subtasks: (fields[7] as List).cast<Subtask>(),
-      tag: fields[6] as Tag?,
       priority: fields[2] as PriorityTask?,
-      timeStart: fields[4] as TimeOfDay?,
-      timeEnd: fields[5] as TimeOfDay?,
+      subtasks: (fields[3] as List).cast<Subtask>(),
+      tag: fields[4] as Tag?,
+      dateStart: fields[6] as DateTime?,
+      timeStart: fields[7] as TimeOfDay?,
+      days: (fields[8] as List).cast<int>(),
+      finishDates: (fields[9] as List).cast<DateTime>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Event obj) {
     writer
+      ..writeByte(10)
       ..writeByte(8)
+      ..write(obj.days)
+      ..writeByte(9)
+      ..write(obj.finishDates)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -39,15 +45,15 @@ class EventAdapter extends TypeAdapter<Event> {
       ..writeByte(2)
       ..write(obj.priority)
       ..writeByte(3)
-      ..write(obj.days)
+      ..write(obj.subtasks)
       ..writeByte(4)
-      ..write(obj.timeStart)
-      ..writeByte(5)
-      ..write(obj.timeEnd)
-      ..writeByte(6)
       ..write(obj.tag)
+      ..writeByte(5)
+      ..write(obj.type)
+      ..writeByte(6)
+      ..write(obj.dateStart)
       ..writeByte(7)
-      ..write(obj.subtasks);
+      ..write(obj.timeStart);
   }
 
   @override

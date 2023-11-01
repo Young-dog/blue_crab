@@ -1,20 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:table_calendar/table_calendar.dart';
-
 import '../../../../../app/app.dart';
-import '../../../../../domain/domain.dart';
 import '../../../../presentation.dart';
 
 class CalendarButton extends StatelessWidget {
   const CalendarButton({
-    required this.type,
     required this.date,
     required this.time,
     required this.onChangedTime,
     required this.onChangedDate,
+    this.days,
     super.key,
   });
 
@@ -26,7 +22,7 @@ class CalendarButton extends StatelessWidget {
 
   final void Function(TimeOfDay? time) onChangedTime;
 
-  final TypeTask type;
+  final List<int>? days;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +30,9 @@ class CalendarButton extends StatelessWidget {
 
     return IconButton(
       onPressed: () async {
-        type == TypeTask.task
+        days == null || days!.isEmpty
             ? await _openDateTimeModal(context)
-            : _openTimeModal(context);
+            : await _openTimeModal(context);
       },
       icon: FaIcon(
         FontAwesomeIcons.calendar,
