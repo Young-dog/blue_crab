@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 import '../../../../app/app.dart';
 
-class TimePin extends StatelessWidget {
-  const TimePin({
+class DateTimePin extends StatelessWidget {
+  const DateTimePin({
+    required this.date,
     required this.time,
     super.key,
   });
 
-  final TimeOfDay time;
+  final DateTime? date;
+  final TimeOfDay? time;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: theme.spacings.x2,
-      ),
       padding: EdgeInsets.symmetric(
         vertical: theme.spacings.x1,
         horizontal: theme.spacings.x2,
@@ -31,12 +30,17 @@ class TimePin extends StatelessWidget {
         ),
       ),
       child: Text(
-        t.task_button.time_tittle(
-          hours: time.hour,
-          minutes: time.minute / 10 < 1
-              ? '0${time.minute}'
-              : time.minute,
-        ),
+        t.task_page.date_time_pin.date(
+              day: date?.day ?? '',
+              month: date != null
+                  ? DateFormat.MMM(LocaleSettings.currentLocale.languageCode)
+                      .format(date!)
+                  : '',
+            ) + (time != null ?
+            t.task_page.date_time_pin.time(
+              hours: time!.hour,
+              minutes: time!.minute / 10 < 1 ? '0${time!.minute}' : time!.minute,
+            ) : ''),
         style: theme.textTheme.labelSmall!.copyWith(
           color: theme.palette.textPrimary,
         ),

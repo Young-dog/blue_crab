@@ -6,7 +6,8 @@ abstract class LocaleTasksDataSource {
   const LocaleTasksDataSource();
 
   Future<void> addTask({
-    required Task task,
+    required Task? previousTask,
+    required Task currentTask,
   });
 
   Future<List<Task>> getTasks();
@@ -44,30 +45,31 @@ class LocaleTasksDataSourceImpl implements LocaleTasksDataSource {
 
   @override
   Future<void> addTask({
-    required Task task,
+    required Task? previousTask,
+    required Task currentTask,
   }) async {
-    if (_taskBox.values.toList().contains(task)) {
-      final index = _taskBox.values.toList().indexOf(task);
+    if (previousTask != null && _taskBox.values.toList().contains(previousTask)) {
+      final index = _taskBox.values.toList().indexOf(previousTask);
 
       Task? updateTask;
 
-      if (task.finish) {
-        final subtasks = task.subtasks.map((e) {
+      if (currentTask.finish) {
+        final subtasks = currentTask.subtasks.map((e) {
           final sub = e.copyWith(finish: true);
           return sub;
         }).toList();
-        updateTask = task.copyWith(
+        updateTask = currentTask.copyWith(
           subtasks: subtasks,
         );
       }
 
       await _taskBox.putAt(
         index,
-        updateTask ?? task,
+        updateTask ?? currentTask,
       );
     } else {
       await _taskBox.add(
-        task,
+        currentTask,
       );
     }
   }

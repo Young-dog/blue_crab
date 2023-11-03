@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../data/data.dart';
 import '../domain.dart';
@@ -13,6 +14,7 @@ abstract class EventsRepository {
   List<Event> get events;
 
   Future<void> addEvent({
+    required Event? previousEvent,
     required TypeTask type,
     required String title,
     required String description,
@@ -30,7 +32,7 @@ abstract class EventsRepository {
   });
 }
 
-class EventsRepositoryImpl implements EventsRepository {
+class EventsRepositoryImpl implements EventsRepository, Disposable {
   EventsRepositoryImpl._internal({
     required List<Event> events,
     required LocaleEventsDataSource localeEventsDataSource,
@@ -59,6 +61,7 @@ class EventsRepositoryImpl implements EventsRepository {
 
   @override
   Future<void> addEvent({
+    required Event? previousEvent,
     required TypeTask type,
     required String title,
     required String description,
@@ -83,7 +86,8 @@ class EventsRepositoryImpl implements EventsRepository {
     );
 
     await _localeEventsDataSource.addEvent(
-      event: event,
+      previousEvent: previousEvent,
+      currentEvent: event,
     );
 
     await changeEvents();
@@ -108,5 +112,10 @@ class EventsRepositoryImpl implements EventsRepository {
     _events = await _localeEventsDataSource.getEvents();
 
     _eventsController.add(_events);
+  }
+
+  @override
+  FutureOr onDispose() {
+    _eventsController.close();
   }
 }

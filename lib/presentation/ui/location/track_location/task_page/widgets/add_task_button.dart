@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../app/app.dart';
+import '../../../../../../domain/domain.dart';
 import '../../../../../presentation.dart';
 
 class AddTaskButton extends StatelessWidget {
   const AddTaskButton({
-    this.index,
+    this.taskModel,
     super.key,
   });
 
-  final int? index;
+  final TaskModel? taskModel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class AddTaskButton extends StatelessWidget {
       onPressed: () {
         context.read<TaskBloc>().add(
               AddTaskEvent(
-                index: index,
+                previousModel: taskModel,
               ),
             );
         context.popRoute();

@@ -10,15 +10,14 @@ import 'views/views.dart';
 class TaskPage extends StatelessWidget {
   const TaskPage({
     this.task,
-    this.index,
     super.key,
   });
 
   final TaskModel? task;
-  final int? index;
 
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
       create: (context) {
         if (task?.type == TypeTask.task) {
@@ -62,7 +61,7 @@ class TaskPage extends StatelessWidget {
         }
       },
       child: TaskView(
-        index: index,
+        taskModel: task,
       ),
     );
   }

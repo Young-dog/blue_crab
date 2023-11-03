@@ -266,6 +266,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     AddTaskEvent event,
     Emitter<TaskState> emit,
   ) async {
+print(event.previousModel);
     if (state.type == TypeTask.task) {
       await _tasksRepository.addTask(
         type: state.type,
@@ -279,6 +280,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         subtasks: state.subtasks,
         tag: state.tag,
         finish: state.finish,
+        previousTask: (event.previousModel != null)
+            ? (event.previousModel as Task)
+            : null,
       );
     } else {
       await _eventsRepository.addEvent(
@@ -290,7 +294,10 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         dateStart: state.days.isEmpty ? state.dateStart : null,
         timeStart: state.timeStart,
         days: state.days,
-        finishDates: state.finishDates, type: state.type,
+        finishDates: state.finishDates,
+        type: state.type,
+        previousEvent:
+            (event.previousModel != null) ? (event.previousModel as Event) : null,
       );
     }
   }

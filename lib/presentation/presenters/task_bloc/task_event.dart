@@ -155,13 +155,13 @@ class ChangeDaysTaskEvent extends TaskEvent {
 
 class AddTaskEvent extends TaskEvent {
   const AddTaskEvent({
-    this.index,
+    this.previousModel,
   });
 
-  final int? index;
+  final TaskModel? previousModel;
 
   @override
   List<Object?> get props => [
-        index,
+    previousModel,
       ];
 }

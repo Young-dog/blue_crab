@@ -14,6 +14,7 @@ abstract class TasksRepository {
   List<Task> get tasks;
 
   Future<void> addTask({
+    required Task? previousTask,
     required TypeTask type,
     required String title,
     required String description,
@@ -66,6 +67,7 @@ class TasksRepositoryImpl implements TasksRepository, Disposable {
 
   @override
   Future<void> addTask({
+    required Task? previousTask,
     required TypeTask type,
     required String title,
     required String description,
@@ -93,7 +95,8 @@ class TasksRepositoryImpl implements TasksRepository, Disposable {
     );
 
     await _localeTasksDataSource.addTask(
-      task: task,
+      previousTask: previousTask,
+      currentTask: task,
     );
 
     _tasks = await _localeTasksDataSource.getTasks();

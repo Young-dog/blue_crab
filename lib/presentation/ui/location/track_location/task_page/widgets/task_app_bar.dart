@@ -4,9 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../app/app.dart';
 import '../../../../../../domain/domain.dart';
 import '../../../../../presentation.dart';
+import 'widgets.dart';
 
-class TaskAppBar extends StatelessWidget implements PreferredSizeWidget{
-  const TaskAppBar({super.key});
+class TaskAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const TaskAppBar({
+    required this.task,
+    super.key,
+  });
+
+  final TaskModel? task;
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +35,30 @@ class TaskAppBar extends StatelessWidget implements PreferredSizeWidget{
             value: state.type,
             items: TypeTask.values
                 .map(
-                  (e) =>
-                  DropdownMenuItem(
+                  (e) => DropdownMenuItem(
                     value: e,
                     child: Text(
                       e.toText(t),
                     ),
                   ),
-            )
+                )
                 .toList(),
             onChanged: (TypeTask? value) {
               context.read<TaskBloc>().add(
-                ChangeTypeTaskEvent(
-                  type: value!,
-                ),
-              );
+                    ChangeTypeTaskEvent(
+                      type: value!,
+                    ),
+                  );
             },
           ),
+          actions: [
+            if (state.title.isNotEmpty)
+              AddTaskButton(
+                taskModel: task,
+              )
+            else
+              Container(),
+          ],
         );
       },
     );

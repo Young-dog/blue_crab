@@ -46,7 +46,6 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: TaskPage(
           task: args.task,
-          index: args.index,
           key: args.key,
         ),
       );
@@ -121,14 +120,12 @@ class SettingsRoute extends PageRouteInfo<void> {
 class TaskRoute extends PageRouteInfo<TaskRouteArgs> {
   TaskRoute({
     TaskModel? task,
-    int? index,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           TaskRoute.name,
           args: TaskRouteArgs(
             task: task,
-            index: index,
             key: key,
           ),
           initialChildren: children,
@@ -142,19 +139,16 @@ class TaskRoute extends PageRouteInfo<TaskRouteArgs> {
 class TaskRouteArgs {
   const TaskRouteArgs({
     this.task,
-    this.index,
     this.key,
   });
 
   final TaskModel? task;
 
-  final int? index;
-
   final Key? key;
 
   @override
   String toString() {
-    return 'TaskRouteArgs{task: $task, index: $index, key: $key}';
+    return 'TaskRouteArgs{task: $task, key: $key}';
   }
 }
 

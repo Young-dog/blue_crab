@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 34 (17 per locale)
+/// Strings: 38 (19 per locale)
 ///
-/// Built on 2023-10-30 at 12:56 UTC
+/// Built on 2023-11-02 at 09:32 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -204,6 +204,7 @@ class _StringsTaskPageEn {
 
 	// Translations
 	String get title_label => 'Title...';
+	late final _StringsTaskPageDateTimePinEn date_time_pin = _StringsTaskPageDateTimePinEn._(_root);
 }
 
 // Path: calendar_button
@@ -236,7 +237,18 @@ class _StringsTaskButtonEn {
 
 	// Translations
 	String tag_title({required Object tag}) => '# ${tag}';
-	String date_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+	String time_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+}
+
+// Path: task_page.date_time_pin
+class _StringsTaskPageDateTimePinEn {
+	_StringsTaskPageDateTimePinEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String date({required Object day, required Object month}) => '${day} ${month} ';
+	String time({required Object hours, required Object minutes}) => '${hours}:${minutes}';
 }
 
 // Path: <root>
@@ -318,6 +330,7 @@ class _StringsTaskPageRu implements _StringsTaskPageEn {
 
 	// Translations
 	@override String get title_label => 'Название...';
+	@override late final _StringsTaskPageDateTimePinRu date_time_pin = _StringsTaskPageDateTimePinRu._(_root);
 }
 
 // Path: calendar_button
@@ -350,7 +363,18 @@ class _StringsTaskButtonRu implements _StringsTaskButtonEn {
 
 	// Translations
 	@override String tag_title({required Object tag}) => '# ${tag}';
-	@override String date_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+	@override String time_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+}
+
+// Path: task_page.date_time_pin
+class _StringsTaskPageDateTimePinRu implements _StringsTaskPageDateTimePinEn {
+	_StringsTaskPageDateTimePinRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String date({required Object day, required Object month}) => '${day} ${month} ';
+	@override String time({required Object hours, required Object minutes}) => '${hours}:${minutes}';
 }
 
 /// Flat map(s) containing all translations.
@@ -370,12 +394,14 @@ extension on _StringsEn {
 			case 'task_type.task': return 'Task';
 			case 'task_type.event': return 'Event';
 			case 'task_page.title_label': return 'Title...';
+			case 'task_page.date_time_pin.date': return ({required Object day, required Object month}) => '${day} ${month} ';
+			case 'task_page.date_time_pin.time': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
 			case 'calendar_button.add': return 'Добавить';
 			case 'calendar_button.time': return '+ Время';
 			case 'calendar_button.delete': return 'Удалить';
 			case 'subtask_input.hint_text': return 'Подзадача';
 			case 'task_button.tag_title': return ({required Object tag}) => '# ${tag}';
-			case 'task_button.date_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+			case 'task_button.time_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
 			default: return null;
 		}
 	}
@@ -395,12 +421,14 @@ extension on _StringsRu {
 			case 'task_type.task': return 'Задача';
 			case 'task_type.event': return 'Событие';
 			case 'task_page.title_label': return 'Название...';
+			case 'task_page.date_time_pin.date': return ({required Object day, required Object month}) => '${day} ${month} ';
+			case 'task_page.date_time_pin.time': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
 			case 'calendar_button.add': return 'Добавить';
 			case 'calendar_button.time': return '+ Время';
 			case 'calendar_button.delete': return 'Удалить';
 			case 'subtask_input.hint_text': return 'Подзадача';
 			case 'task_button.tag_title': return ({required Object tag}) => '# ${tag}';
-			case 'task_button.date_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+			case 'task_button.time_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
 			default: return null;
 		}
 	}

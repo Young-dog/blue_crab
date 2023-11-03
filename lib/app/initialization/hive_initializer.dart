@@ -39,5 +39,5 @@ Future<void> initializeHive() async {
     );
 
 
-  await Hive.deleteBoxFromDisk(HiveBoxes.tasksBox);
+  //await Hive.deleteBoxFromDisk(HiveBoxes.tasksBox);
 }

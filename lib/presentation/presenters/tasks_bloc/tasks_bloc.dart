@@ -14,7 +14,8 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   TasksBloc({
     required TasksRepository tasksRepository,
     required EventsRepository eventsRepository,
-  })  : _tasksRepository = tasksRepository,
+  })
+      : _tasksRepository = tasksRepository,
         _eventsRepository = eventsRepository,
         super(TasksState.initial()) {
     on<DelTasksEvent>(_onDelTasks);
@@ -36,75 +37,64 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   void _init() {
     _tasksSubscription = _tasksRepository.tasksChanges.listen((tasks) {
       final tasksLists = _getTasks(tasks: tasks);
+      final events = _getEvents(events: _eventsRepository.events);
 
       add(
-        ChangeTasksEvent(
-          tasks: tasksLists,
-        ),
+        ChangeTasksEvent(tasks: tasksLists, events: events),
       );
     });
 
     _eventsSubscription = _eventsRepository.eventsChanges.listen((events) {
       final eventsList = _getEvents(events: events);
+      final tasks = _getTasks(tasks: _tasksRepository.tasks);
+
       add(
         ChangeTasksEvent(
           events: eventsList,
+          tasks: tasks,
         ),
       );
     });
   }
 
-  void _onChangeTasks(
-    ChangeTasksEvent event,
-    Emitter<TasksState> emit,
-  ) {
-    if (event.tasks == null && event.events != null) {
-      emit(
-        state.copyWith(
-          tasksStatus: TasksStatus.changeTasksList,
-          events: event.events,
-        ),
-      );
+  void _onChangeTasks(ChangeTasksEvent event,
+      Emitter<TasksState> emit,) {
+    emit(
+      state.copyWith(
+        tasksStatus: TasksStatus.changeTasksList,
+        events: event.events,
+        tasks: event.tasks,
+      ),
+    );
 
-      final tasksList = <TaskModel>[
-        ...event.events!,
-        ...state.tasks,
-      ];
+    final finishEvents = event.events
+        .where(
+          (element) =>
+          element.finishDates.contains(
+            state.selectedDate,
+          ),
+    )
+        .length;
+    final finishTasks = event.tasks
+        .where((element) => element.finish)
+        .length;
 
-      emit(
-        state.copyWith(
-          tasksStatus: TasksStatus.success,
-          tasksList: tasksList,
-        ),
-      );
-    } else if (event.events == null && event.tasks != null) {
-      emit(
-        state.copyWith(
-          tasksStatus: TasksStatus.changeTasksList,
-          tasks: event.tasks,
-        ),
-      );
+    final tasksList = <TaskModel>[
+      ...event.tasks,
+      ...event.events,
+    ];
 
-      final tasksList = <TaskModel>[
-        ...event.tasks!,
-        ...state.events,
-      ];
-
-      emit(
-        state.copyWith(
-          tasksStatus: TasksStatus.success,
-          tasksList: tasksList,
-        ),
-      );
-    } else {
-      return;
-    }
+    emit(
+      state.copyWith(
+        tasksStatus: TasksStatus.success,
+        tasksList: tasksList,
+        finishCount: finishEvents + finishTasks,
+      ),
+    );
   }
 
-  void _onChangeDate(
-    ChangeDateEvent event,
-    Emitter<TasksState> emit,
-  ) {
+  void _onChangeDate(ChangeDateEvent event,
+      Emitter<TasksState> emit,) {
     emit(
       state.copyWith(
         tasksStatus: TasksStatus.changeTasksList,
@@ -124,15 +114,16 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     final finishCountTasks = tasks
         .where(
           (e) => e.finish,
-        )
+    )
         .toList();
 
     final finishCountEvents = events
         .where(
-          (e) => e.finishDates.contains(
+          (e) =>
+          e.finishDates.contains(
             state.selectedDate,
           ),
-        )
+    )
         .toList();
 
     final finishCount = finishCountTasks.length + finishCountEvents.length;
@@ -145,10 +136,8 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     );
   }
 
-  Future<void> _onDelTasks(
-    DelTasksEvent event,
-    Emitter<TasksState> emit,
-  ) async {
+  Future<void> _onDelTasks(DelTasksEvent event,
+      Emitter<TasksState> emit,) async {
     emit(
       state.copyWith(
         tasksStatus: TasksStatus.changeTasksList,
@@ -178,10 +167,8 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     }
   }
 
-  Future<void> _onFinishTasks(
-    FinishTaskEvent event,
-    Emitter<TasksState> emit,
-  ) async {
+  Future<void> _onFinishTasks(FinishTaskEvent event,
+      Emitter<TasksState> emit,) async {
     emit(
       state.copyWith(
         tasksStatus: TasksStatus.changeTasksList,
@@ -190,11 +177,10 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
 
     try {
       if (event.type == TypeTask.task) {
-
         final task = event.task as Task;
         await _tasksRepository.finishTasks(
           task: task,
-          finish: task.finish ,
+          finish: !task.finish,
         );
       } else {
         final eventTask = event.task as Event;
@@ -220,6 +206,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
           timeStart: eventTask.timeStart,
           days: eventTask.days,
           finishDates: eventTask.finishDates,
+          previousEvent: event.task as Event,
         );
       }
 
@@ -245,24 +232,49 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   List<Task> _getTasks({
     required List<Task> tasks,
   }) {
-    final tasksList = tasks
-        .where(
-          (e) =>
-              (e.dateStart == null && state.selectedDate == DateTime.now()) ||
-              ((e.dateEnd == null && e.dateStart != null) &&
-                  (e.dateStart?.year == state.selectedDate.year &&
-                      e.dateStart?.month == state.selectedDate.month &&
-                      e.dateStart?.day == state.selectedDate.day)) ||
-              ((e.dateStart != null && e.dateEnd != null) &&
-                  ((e.dateStart?.year == state.selectedDate.year &&
-                          e.dateStart?.month == state.selectedDate.month &&
-                          e.dateStart?.day == state.selectedDate.day) ||
-                      (e.dateEnd?.year == state.selectedDate.year &&
-                          e.dateEnd?.month == state.selectedDate.month &&
-                          e.dateEnd?.day == state.selectedDate.day) ||
-                      state.selectedDate.compareTo(e.dateEnd!) < 0)),
-        )
-        .toList();
+    final tasksList = tasks.where(
+          (e) {
+        final dateNull = (e.dateStart == null) &&
+            (state.selectedDate.year == DateTime
+                .now()
+                .year &&
+                state.selectedDate.month == DateTime
+                    .now()
+                    .month &&
+                state.selectedDate.day == DateTime
+                    .now()
+                    .day);
+
+        final dateEndNull = (e.dateStart != null && e.dateEnd == null) &&
+            (e.dateStart!.year == state.selectedDate.year &&
+                e.dateStart!.month == state.selectedDate.month &&
+                e.dateStart!.day == state.selectedDate.day);
+
+        final dateNotNull = !e.finish
+            ? (e.dateStart != null && e.dateEnd != null) &&
+            (e.dateStart!.year <= state.selectedDate.year &&
+                e.dateStart!.month <= state.selectedDate.month &&
+                e.dateStart!.day <= state.selectedDate.day) &&
+            (e.dateEnd!.year >= state.selectedDate.year &&
+                e.dateEnd!.month >= state.selectedDate.month &&
+                e.dateEnd!.day >= state.selectedDate.day) &&
+            (state.selectedDate.year == DateTime
+                .now()
+                .year &&
+                state.selectedDate.month == DateTime
+                    .now()
+                    .month &&
+                state.selectedDate.day == DateTime
+                    .now()
+                    .day)
+            : (e.dateStart != null && e.dateEnd != null) &&
+            (e.dateStart!.year == state.selectedDate.year &&
+                e.dateStart!.month == state.selectedDate.month &&
+                e.dateStart!.day == state.selectedDate.day);
+
+        return dateNull || dateEndNull || dateNotNull;
+      },
+    ).toList();
 
     return tasksList;
   }
@@ -272,17 +284,29 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }) {
     final eventsList = events
         .where(
-          (e) =>
-              (e.dateStart?.year == state.selectedDate.year &&
-                  e.dateStart?.month == state.selectedDate.month &&
-                  e.dateStart?.day == state.selectedDate.day) ||
+            (e) {
+          final date = DateTime(
+            state.selectedDate.year, state.selectedDate.month,
+            state.selectedDate.day,);
+
+          return ((e.dateStart?.year == state.selectedDate.year &&
+              e.dateStart?.month == state.selectedDate.month &&
+              e.dateStart?.day == state.selectedDate.day) ||
               (e.days.contains(
                 state.selectedDate.weekday,
               )) ||
-              (e.dateStart == null &&
-                  e.days.isEmpty &&
-                  state.selectedDate == DateTime.now()),
-        )
+              (state.selectedDate.year == DateTime
+                  .now()
+                  .year &&
+                  state.selectedDate.month == DateTime
+                      .now()
+                      .month &&
+                  state.selectedDate.day == DateTime
+                      .now()
+                      .day)) &&
+              (!e.finishDates.contains(date));
+        }
+    )
         .toList();
 
     return eventsList;

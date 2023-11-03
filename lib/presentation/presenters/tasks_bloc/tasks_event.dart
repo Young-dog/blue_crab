@@ -26,13 +26,13 @@ class DelTasksEvent extends TasksEvent {
 
 class ChangeTasksEvent extends TasksEvent {
   const ChangeTasksEvent({
-    this.tasks,
-    this.events,
+    required this.tasks,
+    required this.events,
   });
 
-  final List<Event>? events;
+  final List<Event> events;
 
-  final List<Task>? tasks;
+  final List<Task> tasks;
 
   @override
   List<Object?> get props => [

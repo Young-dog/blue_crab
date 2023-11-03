@@ -6,7 +6,8 @@ abstract class LocaleEventsDataSource {
   const LocaleEventsDataSource();
 
   Future<void> addEvent({
-    required Event event,
+    required Event? previousEvent,
+    required Event currentEvent,
   });
 
   Future<List<Event>> getEvents();
@@ -40,20 +41,19 @@ class LocaleEventsDataSourceImpl implements LocaleEventsDataSource {
 
   @override
   Future<void> addEvent({
-    required Event event,
+    required Event? previousEvent,
+    required Event currentEvent,
   }) async {
-    if (_eventsBox.values.toList().contains(event)) {
-      final index = _eventsBox.values.toList().indexOf(event);
-
-      Event? updateTask;
+    if (previousEvent != null && _eventsBox.values.toList().contains(previousEvent)) {
+      final index = _eventsBox.values.toList().indexOf(previousEvent);
 
       await _eventsBox.putAt(
         index,
-        updateTask ?? event,
+        currentEvent,
       );
     } else {
       await _eventsBox.add(
-        event,
+        currentEvent,
       );
     }
   }

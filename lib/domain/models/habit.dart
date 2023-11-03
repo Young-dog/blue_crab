@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import '../../app/app.dart';
-import '../domain.dart';
 
 part 'habit.g.dart';
 
@@ -12,8 +11,6 @@ class Habit extends Equatable {
     required this.description,
     required this.countRepetitions,
     required this.days,
-    this.tag,
-    this.priority,
   });
 
   @HiveField(0)
@@ -22,25 +19,17 @@ class Habit extends Equatable {
   @HiveField(1)
   final String description;
 
-  @HiveField(2)
-  final PriorityTask? priority;
-
   @HiveField(3)
   final List<int> days;
 
   @HiveField(4)
-  final List<int> countRepetitions;
-
-  @HiveField(5)
-  final Tag? tag;
+  final int countRepetitions;
 
   @override
   List<Object?> get props => [
     title,
     description,
     days,
-    tag,
-    priority,
     countRepetitions,
   ];
 }

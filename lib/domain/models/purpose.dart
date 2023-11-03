@@ -12,12 +12,12 @@ class Purpose extends Equatable {
   const Purpose({
     required this.title,
     required this.description,
-    this.tag,
-    this.priority,
-    this.dateStart,
-    this.dateEnd,
-    this.timeStart,
-    this.timeEnd,
+    required this.tag,
+    required this.priority,
+    required this.dateStart,
+    required this.dateEnd,
+    required this.timeStart,
+    required this.timeEnd,
   });
 
   @HiveField(0)

@@ -55,7 +55,8 @@ class _TaskButtonState extends State<TaskButton> {
         if (_xOffset < -25) {
           context.read<TasksBloc>().add(
                 DelTasksEvent(
-                  task: widget.task, type: widget.task.type,
+                  task: widget.task,
+                  type: widget.task.type,
                 ),
               );
         } else if (_xOffset > 25) {
@@ -82,7 +83,6 @@ class _TaskButtonState extends State<TaskButton> {
               context.pushRoute(
                 TaskRoute(
                   task: widget.task,
-                  index: widget.index,
                 ),
               );
             },
@@ -116,7 +116,8 @@ class _TaskButtonState extends State<TaskButton> {
                             onChanged: (value) {
                               context.read<TasksBloc>().add(
                                     FinishTaskEvent(
-                                      task: widget.task,type: widget.task.type,
+                                      task: widget.task,
+                                      type: widget.task.type,
                                     ),
                                   );
                             },
@@ -127,7 +128,9 @@ class _TaskButtonState extends State<TaskButton> {
                         child: Text(
                           widget.task.title,
                           style: theme.textTheme.titleSmall!.copyWith(
-                            color: widget.task.type == TypeTask.event ? theme.palette.other.low : null,
+                            color: widget.task.type == TypeTask.event
+                                ? theme.palette.other.low
+                                : null,
                             decoration: widget.finish
                                 ? TextDecoration.lineThrough
                                 : null,
@@ -149,21 +152,10 @@ class _TaskButtonState extends State<TaskButton> {
                         TagPin(
                           tag: widget.task.tag!,
                         ),
-                      if(event?.days.isNotEmpty ?? false)
-                        const RepeatPin(),
+                      if (event?.days.isNotEmpty ?? false) const RepeatPin(),
                       if (widget.task.timeStart != null)
                         TimePin(
                           time: widget.task.timeStart!,
-                        ),
-                      if (task?.timeEnd != null &&
-                          task?.timeStart != null)
-                        Icon(
-                          Icons.navigate_next,
-                          color: theme.palette.iconPrimary,
-                        ),
-                      if (task?.timeEnd != null)
-                        TimePin(
-                          time: task!.timeEnd!,
                         ),
                     ],
                   ),

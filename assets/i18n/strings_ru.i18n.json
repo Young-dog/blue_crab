@@ -16,7 +16,11 @@
     "event" : "Событие"
   },
   "task_page" : {
-    "title_label" : "Название..."
+    "title_label" : "Название...",
+    "date_time_pin": {
+      "date" : "$day $month ",
+      "time" : "$hours:$minutes"
+    }
   },
   "calendar_button" : {
     "add" : "Добавить",
@@ -28,6 +32,6 @@
   },
   "task_button" : {
     "tag_title" : "# $tag",
-    "date_tittle" : "$hours:$minutes"
+    "time_tittle": "$hours:$minutes"
   }
 }
