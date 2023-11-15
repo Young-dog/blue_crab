@@ -46,36 +46,38 @@ class TagButton extends StatelessWidget {
       ),
       context: ctx,
       builder: (context) {
-          return BlocProvider.value(
-            value: BlocProvider.of<TaskBloc>(ctx),
-            child: SafeArea(
-              child: Container(
-                constraints: BoxConstraints(
-                  maxHeight: theme.spacings.x20 * 5,
-                ),
-                child: BlocProvider(
-                  create: (context) => TagsBloc(
-                    tagsRepository: GetIt.instance(),
-                ),
-                child: const _TagsModal(),
+          return SafeArea(
+            child: Container(
+              constraints: BoxConstraints(
+                maxHeight: theme.spacings.x20 * 5,
               ),
+              child: BlocProvider(
+                create: (context) => TagsBloc(
+                  tagsRepository: GetIt.instance(),
+              ),
+              child:  _TagsModal(onChanged: onChanged,),
             ),
           ),
-        );
+          );
       },
     );
   }
 }
 
 class _TagsModal extends StatefulWidget {
-  const _TagsModal();
+  const _TagsModal({required this.onChanged});
+
+
+  final void Function(Tag tag) onChanged;
 
   @override
   State<_TagsModal> createState() => _TagsModalState();
 }
 
 class _TagsModalState extends State<_TagsModal> {
+
   late final TextEditingController _controller;
+
 
   final _tags = Hive.box<Tag>(HiveBoxes.tagsBox);
 
@@ -214,11 +216,7 @@ class _TagsModalState extends State<_TagsModal> {
                         direction: DismissDirection.endToStart,
                         child: InkWell(
                           onTap: () {
-                            context.read<TaskBloc>().add(
-                                  ChangeTagTaskEvent(
-                                    tag: tag,
-                                  ),
-                                );
+                            widget.onChanged(tag);
                             Navigator.pop(context);
                           },
                           child: Container(
@@ -242,7 +240,7 @@ class _TagsModalState extends State<_TagsModal> {
                               ],
                             ),
                             child: Text(
-                              t.task_button.tag_title(tag: tag.title),
+                              t.common.tag_button.tag_title(tag: tag.title),
                               style: theme.textTheme.bodyMedium!.copyWith(
                                 color: theme.palette.textPrimary,
                                 fontWeight: FontWeight.w700,

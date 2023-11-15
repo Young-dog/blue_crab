@@ -21,7 +21,7 @@ class TaskBox extends StatelessWidget {
           finishElements: state.finishCount,
           countElements: tasks.length,
           icon: AssetNames.taskIcon,
-          title: t.track_page.tasks_box_title,
+          title: t.track_location.track_page.tasks_box_title,
           colorIcon: theme.palette.iconPrimary,
           onPressedAdd: () {
             context.router.push(

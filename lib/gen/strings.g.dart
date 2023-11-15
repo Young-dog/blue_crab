@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 38 (19 per locale)
+/// Strings: 46 (23 per locale)
 ///
-/// Built on 2023-11-03 at 06:34 UTC
+/// Built on 2023-11-12 at 21:01 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -150,25 +150,9 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	late final _StringsEn _root = this; // ignore: unused_field
 
 	// Translations
-	late final _StringsTrackPageEn track_page = _StringsTrackPageEn._(_root);
 	late final _StringsPriorityTaskEn priority_task = _StringsPriorityTaskEn._(_root);
-	late final _StringsTaskTypeEn task_type = _StringsTaskTypeEn._(_root);
-	late final _StringsTaskPageEn task_page = _StringsTaskPageEn._(_root);
-	late final _StringsCalendarButtonEn calendar_button = _StringsCalendarButtonEn._(_root);
-	late final _StringsSubtaskInputEn subtask_input = _StringsSubtaskInputEn._(_root);
-	late final _StringsTaskButtonEn task_button = _StringsTaskButtonEn._(_root);
-}
-
-// Path: track_page
-class _StringsTrackPageEn {
-	_StringsTrackPageEn._(this._root);
-
-	final _StringsEn _root; // ignore: unused_field
-
-	// Translations
-	String get habits_box_title => 'Habits';
-	String get purposes_box_title => 'Purposes';
-	String get tasks_box_title => 'Tasks and events';
+	late final _StringsCommonEn common = _StringsCommonEn._(_root);
+	late final _StringsTrackLocationEn track_location = _StringsTrackLocationEn._(_root);
 }
 
 // Path: priority_task
@@ -185,9 +169,112 @@ class _StringsPriorityTaskEn {
 	String get deferred => 'Deferred';
 }
 
-// Path: task_type
-class _StringsTaskTypeEn {
-	_StringsTaskTypeEn._(this._root);
+// Path: common
+class _StringsCommonEn {
+	_StringsCommonEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	late final _StringsCommonDateTimeModelEn date_time_model = _StringsCommonDateTimeModelEn._(_root);
+	late final _StringsCommonTagButtonEn tag_button = _StringsCommonTagButtonEn._(_root);
+	late final _StringsCommonDateTimePinEn date_time_pin = _StringsCommonDateTimePinEn._(_root);
+	late final _StringsCommonTimePinEn time_pin = _StringsCommonTimePinEn._(_root);
+	late final _StringsCommonSubtaskInputEn subtask_input = _StringsCommonSubtaskInputEn._(_root);
+	String get descriptions_input => 'Description';
+}
+
+// Path: track_location
+class _StringsTrackLocationEn {
+	_StringsTrackLocationEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get title_label => 'Title...';
+	late final _StringsTrackLocationHabitPageEn habit_page = _StringsTrackLocationHabitPageEn._(_root);
+	late final _StringsTrackLocationTrackPageEn track_page = _StringsTrackLocationTrackPageEn._(_root);
+	late final _StringsTrackLocationTaskTypeEn task_type = _StringsTrackLocationTaskTypeEn._(_root);
+}
+
+// Path: common.date_time_model
+class _StringsCommonDateTimeModelEn {
+	_StringsCommonDateTimeModelEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	late final _StringsCommonDateTimeModelCalendarButtonEn calendar_button = _StringsCommonDateTimeModelCalendarButtonEn._(_root);
+}
+
+// Path: common.tag_button
+class _StringsCommonTagButtonEn {
+	_StringsCommonTagButtonEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String tag_title({required Object tag}) => '# ${tag}';
+}
+
+// Path: common.date_time_pin
+class _StringsCommonDateTimePinEn {
+	_StringsCommonDateTimePinEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String date({required Object day, required Object month}) => '${day} ${month} ';
+	String time({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+}
+
+// Path: common.time_pin
+class _StringsCommonTimePinEn {
+	_StringsCommonTimePinEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String time_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+}
+
+// Path: common.subtask_input
+class _StringsCommonSubtaskInputEn {
+	_StringsCommonSubtaskInputEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get hint_text => 'Subtask';
+}
+
+// Path: track_location.habit_page
+class _StringsTrackLocationHabitPageEn {
+	_StringsTrackLocationHabitPageEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get repetitions_habit_title => 'Repetitions';
+	String get missed_habit_title => 'Missed';
+	String get completed_habit_title => 'Completed';
+}
+
+// Path: track_location.track_page
+class _StringsTrackLocationTrackPageEn {
+	_StringsTrackLocationTrackPageEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get habits_box_title => 'Habits';
+	String get purposes_box_title => 'Purposes';
+	String get tasks_box_title => 'Tasks and events';
+}
+
+// Path: track_location.task_type
+class _StringsTrackLocationTaskTypeEn {
+	_StringsTrackLocationTaskTypeEn._(this._root);
 
 	final _StringsEn _root; // ignore: unused_field
 
@@ -196,59 +283,16 @@ class _StringsTaskTypeEn {
 	String get event => 'Event';
 }
 
-// Path: task_page
-class _StringsTaskPageEn {
-	_StringsTaskPageEn._(this._root);
+// Path: common.date_time_model.calendar_button
+class _StringsCommonDateTimeModelCalendarButtonEn {
+	_StringsCommonDateTimeModelCalendarButtonEn._(this._root);
 
 	final _StringsEn _root; // ignore: unused_field
 
 	// Translations
-	String get title_label => 'Title...';
-	late final _StringsTaskPageDateTimePinEn date_time_pin = _StringsTaskPageDateTimePinEn._(_root);
-}
-
-// Path: calendar_button
-class _StringsCalendarButtonEn {
-	_StringsCalendarButtonEn._(this._root);
-
-	final _StringsEn _root; // ignore: unused_field
-
-	// Translations
-	String get add => 'Добавить';
-	String get time => '+ Время';
-	String get delete => 'Удалить';
-}
-
-// Path: subtask_input
-class _StringsSubtaskInputEn {
-	_StringsSubtaskInputEn._(this._root);
-
-	final _StringsEn _root; // ignore: unused_field
-
-	// Translations
-	String get hint_text => 'Подзадача';
-}
-
-// Path: task_button
-class _StringsTaskButtonEn {
-	_StringsTaskButtonEn._(this._root);
-
-	final _StringsEn _root; // ignore: unused_field
-
-	// Translations
-	String tag_title({required Object tag}) => '# ${tag}';
-	String time_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
-}
-
-// Path: task_page.date_time_pin
-class _StringsTaskPageDateTimePinEn {
-	_StringsTaskPageDateTimePinEn._(this._root);
-
-	final _StringsEn _root; // ignore: unused_field
-
-	// Translations
-	String date({required Object day, required Object month}) => '${day} ${month} ';
-	String time({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+	String get add => 'Add';
+	String get time => '+ Time';
+	String get delete => 'Delete';
 }
 
 // Path: <root>
@@ -276,25 +320,9 @@ class _StringsRu implements _StringsEn {
 	@override late final _StringsRu _root = this; // ignore: unused_field
 
 	// Translations
-	@override late final _StringsTrackPageRu track_page = _StringsTrackPageRu._(_root);
 	@override late final _StringsPriorityTaskRu priority_task = _StringsPriorityTaskRu._(_root);
-	@override late final _StringsTaskTypeRu task_type = _StringsTaskTypeRu._(_root);
-	@override late final _StringsTaskPageRu task_page = _StringsTaskPageRu._(_root);
-	@override late final _StringsCalendarButtonRu calendar_button = _StringsCalendarButtonRu._(_root);
-	@override late final _StringsSubtaskInputRu subtask_input = _StringsSubtaskInputRu._(_root);
-	@override late final _StringsTaskButtonRu task_button = _StringsTaskButtonRu._(_root);
-}
-
-// Path: track_page
-class _StringsTrackPageRu implements _StringsTrackPageEn {
-	_StringsTrackPageRu._(this._root);
-
-	@override final _StringsRu _root; // ignore: unused_field
-
-	// Translations
-	@override String get habits_box_title => 'Привычки';
-	@override String get purposes_box_title => 'Цели';
-	@override String get tasks_box_title => 'Задачи и события';
+	@override late final _StringsCommonRu common = _StringsCommonRu._(_root);
+	@override late final _StringsTrackLocationRu track_location = _StringsTrackLocationRu._(_root);
 }
 
 // Path: priority_task
@@ -311,9 +339,112 @@ class _StringsPriorityTaskRu implements _StringsPriorityTaskEn {
 	@override String get deferred => 'Отложеный';
 }
 
-// Path: task_type
-class _StringsTaskTypeRu implements _StringsTaskTypeEn {
-	_StringsTaskTypeRu._(this._root);
+// Path: common
+class _StringsCommonRu implements _StringsCommonEn {
+	_StringsCommonRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsCommonDateTimeModelRu date_time_model = _StringsCommonDateTimeModelRu._(_root);
+	@override late final _StringsCommonTagButtonRu tag_button = _StringsCommonTagButtonRu._(_root);
+	@override late final _StringsCommonDateTimePinRu date_time_pin = _StringsCommonDateTimePinRu._(_root);
+	@override late final _StringsCommonTimePinRu time_pin = _StringsCommonTimePinRu._(_root);
+	@override late final _StringsCommonSubtaskInputRu subtask_input = _StringsCommonSubtaskInputRu._(_root);
+	@override String get descriptions_input => 'Описание';
+}
+
+// Path: track_location
+class _StringsTrackLocationRu implements _StringsTrackLocationEn {
+	_StringsTrackLocationRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get title_label => 'Название...';
+	@override late final _StringsTrackLocationHabitPageRu habit_page = _StringsTrackLocationHabitPageRu._(_root);
+	@override late final _StringsTrackLocationTrackPageRu track_page = _StringsTrackLocationTrackPageRu._(_root);
+	@override late final _StringsTrackLocationTaskTypeRu task_type = _StringsTrackLocationTaskTypeRu._(_root);
+}
+
+// Path: common.date_time_model
+class _StringsCommonDateTimeModelRu implements _StringsCommonDateTimeModelEn {
+	_StringsCommonDateTimeModelRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsCommonDateTimeModelCalendarButtonRu calendar_button = _StringsCommonDateTimeModelCalendarButtonRu._(_root);
+}
+
+// Path: common.tag_button
+class _StringsCommonTagButtonRu implements _StringsCommonTagButtonEn {
+	_StringsCommonTagButtonRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String tag_title({required Object tag}) => '# ${tag}';
+}
+
+// Path: common.date_time_pin
+class _StringsCommonDateTimePinRu implements _StringsCommonDateTimePinEn {
+	_StringsCommonDateTimePinRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String date({required Object day, required Object month}) => '${day} ${month} ';
+	@override String time({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+}
+
+// Path: common.time_pin
+class _StringsCommonTimePinRu implements _StringsCommonTimePinEn {
+	_StringsCommonTimePinRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String time_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+}
+
+// Path: common.subtask_input
+class _StringsCommonSubtaskInputRu implements _StringsCommonSubtaskInputEn {
+	_StringsCommonSubtaskInputRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get hint_text => 'Подзадача';
+}
+
+// Path: track_location.habit_page
+class _StringsTrackLocationHabitPageRu implements _StringsTrackLocationHabitPageEn {
+	_StringsTrackLocationHabitPageRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get repetitions_habit_title => 'Повторений';
+	@override String get missed_habit_title => 'Пропущено';
+	@override String get completed_habit_title => 'Завершено';
+}
+
+// Path: track_location.track_page
+class _StringsTrackLocationTrackPageRu implements _StringsTrackLocationTrackPageEn {
+	_StringsTrackLocationTrackPageRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get habits_box_title => 'Привычки';
+	@override String get purposes_box_title => 'Цели';
+	@override String get tasks_box_title => 'Задачи и события';
+}
+
+// Path: track_location.task_type
+class _StringsTrackLocationTaskTypeRu implements _StringsTrackLocationTaskTypeEn {
+	_StringsTrackLocationTaskTypeRu._(this._root);
 
 	@override final _StringsRu _root; // ignore: unused_field
 
@@ -322,20 +453,9 @@ class _StringsTaskTypeRu implements _StringsTaskTypeEn {
 	@override String get event => 'Событие';
 }
 
-// Path: task_page
-class _StringsTaskPageRu implements _StringsTaskPageEn {
-	_StringsTaskPageRu._(this._root);
-
-	@override final _StringsRu _root; // ignore: unused_field
-
-	// Translations
-	@override String get title_label => 'Название...';
-	@override late final _StringsTaskPageDateTimePinRu date_time_pin = _StringsTaskPageDateTimePinRu._(_root);
-}
-
-// Path: calendar_button
-class _StringsCalendarButtonRu implements _StringsCalendarButtonEn {
-	_StringsCalendarButtonRu._(this._root);
+// Path: common.date_time_model.calendar_button
+class _StringsCommonDateTimeModelCalendarButtonRu implements _StringsCommonDateTimeModelCalendarButtonEn {
+	_StringsCommonDateTimeModelCalendarButtonRu._(this._root);
 
 	@override final _StringsRu _root; // ignore: unused_field
 
@@ -345,63 +465,35 @@ class _StringsCalendarButtonRu implements _StringsCalendarButtonEn {
 	@override String get delete => 'Удалить';
 }
 
-// Path: subtask_input
-class _StringsSubtaskInputRu implements _StringsSubtaskInputEn {
-	_StringsSubtaskInputRu._(this._root);
-
-	@override final _StringsRu _root; // ignore: unused_field
-
-	// Translations
-	@override String get hint_text => 'Подзадача';
-}
-
-// Path: task_button
-class _StringsTaskButtonRu implements _StringsTaskButtonEn {
-	_StringsTaskButtonRu._(this._root);
-
-	@override final _StringsRu _root; // ignore: unused_field
-
-	// Translations
-	@override String tag_title({required Object tag}) => '# ${tag}';
-	@override String time_tittle({required Object hours, required Object minutes}) => '${hours}:${minutes}';
-}
-
-// Path: task_page.date_time_pin
-class _StringsTaskPageDateTimePinRu implements _StringsTaskPageDateTimePinEn {
-	_StringsTaskPageDateTimePinRu._(this._root);
-
-	@override final _StringsRu _root; // ignore: unused_field
-
-	// Translations
-	@override String date({required Object day, required Object month}) => '${day} ${month} ';
-	@override String time({required Object hours, required Object minutes}) => '${hours}:${minutes}';
-}
-
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
 extension on _StringsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'track_page.habits_box_title': return 'Habits';
-			case 'track_page.purposes_box_title': return 'Purposes';
-			case 'track_page.tasks_box_title': return 'Tasks and events';
 			case 'priority_task.critical': return 'Critical';
 			case 'priority_task.important': return 'Important';
 			case 'priority_task.medium': return 'Medium';
 			case 'priority_task.low': return 'Low';
 			case 'priority_task.deferred': return 'Deferred';
-			case 'task_type.task': return 'Task';
-			case 'task_type.event': return 'Event';
-			case 'task_page.title_label': return 'Title...';
-			case 'task_page.date_time_pin.date': return ({required Object day, required Object month}) => '${day} ${month} ';
-			case 'task_page.date_time_pin.time': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
-			case 'calendar_button.add': return 'Добавить';
-			case 'calendar_button.time': return '+ Время';
-			case 'calendar_button.delete': return 'Удалить';
-			case 'subtask_input.hint_text': return 'Подзадача';
-			case 'task_button.tag_title': return ({required Object tag}) => '# ${tag}';
-			case 'task_button.time_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+			case 'common.date_time_model.calendar_button.add': return 'Add';
+			case 'common.date_time_model.calendar_button.time': return '+ Time';
+			case 'common.date_time_model.calendar_button.delete': return 'Delete';
+			case 'common.tag_button.tag_title': return ({required Object tag}) => '# ${tag}';
+			case 'common.date_time_pin.date': return ({required Object day, required Object month}) => '${day} ${month} ';
+			case 'common.date_time_pin.time': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+			case 'common.time_pin.time_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+			case 'common.subtask_input.hint_text': return 'Subtask';
+			case 'common.descriptions_input': return 'Description';
+			case 'track_location.title_label': return 'Title...';
+			case 'track_location.habit_page.repetitions_habit_title': return 'Repetitions';
+			case 'track_location.habit_page.missed_habit_title': return 'Missed';
+			case 'track_location.habit_page.completed_habit_title': return 'Completed';
+			case 'track_location.track_page.habits_box_title': return 'Habits';
+			case 'track_location.track_page.purposes_box_title': return 'Purposes';
+			case 'track_location.track_page.tasks_box_title': return 'Tasks and events';
+			case 'track_location.task_type.task': return 'Task';
+			case 'track_location.task_type.event': return 'Event';
 			default: return null;
 		}
 	}
@@ -410,25 +502,29 @@ extension on _StringsEn {
 extension on _StringsRu {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'track_page.habits_box_title': return 'Привычки';
-			case 'track_page.purposes_box_title': return 'Цели';
-			case 'track_page.tasks_box_title': return 'Задачи и события';
 			case 'priority_task.critical': return 'Критичный';
 			case 'priority_task.important': return 'Важный';
 			case 'priority_task.medium': return 'Средний';
 			case 'priority_task.low': return 'Низкий';
 			case 'priority_task.deferred': return 'Отложеный';
-			case 'task_type.task': return 'Задача';
-			case 'task_type.event': return 'Событие';
-			case 'task_page.title_label': return 'Название...';
-			case 'task_page.date_time_pin.date': return ({required Object day, required Object month}) => '${day} ${month} ';
-			case 'task_page.date_time_pin.time': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
-			case 'calendar_button.add': return 'Добавить';
-			case 'calendar_button.time': return '+ Время';
-			case 'calendar_button.delete': return 'Удалить';
-			case 'subtask_input.hint_text': return 'Подзадача';
-			case 'task_button.tag_title': return ({required Object tag}) => '# ${tag}';
-			case 'task_button.time_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+			case 'common.date_time_model.calendar_button.add': return 'Добавить';
+			case 'common.date_time_model.calendar_button.time': return '+ Время';
+			case 'common.date_time_model.calendar_button.delete': return 'Удалить';
+			case 'common.tag_button.tag_title': return ({required Object tag}) => '# ${tag}';
+			case 'common.date_time_pin.date': return ({required Object day, required Object month}) => '${day} ${month} ';
+			case 'common.date_time_pin.time': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+			case 'common.time_pin.time_tittle': return ({required Object hours, required Object minutes}) => '${hours}:${minutes}';
+			case 'common.subtask_input.hint_text': return 'Подзадача';
+			case 'common.descriptions_input': return 'Описание';
+			case 'track_location.title_label': return 'Название...';
+			case 'track_location.habit_page.repetitions_habit_title': return 'Повторений';
+			case 'track_location.habit_page.missed_habit_title': return 'Пропущено';
+			case 'track_location.habit_page.completed_habit_title': return 'Завершено';
+			case 'track_location.track_page.habits_box_title': return 'Привычки';
+			case 'track_location.track_page.purposes_box_title': return 'Цели';
+			case 'track_location.track_page.tasks_box_title': return 'Задачи и события';
+			case 'track_location.task_type.task': return 'Задача';
+			case 'track_location.task_type.event': return 'Событие';
 			default: return null;
 		}
 	}

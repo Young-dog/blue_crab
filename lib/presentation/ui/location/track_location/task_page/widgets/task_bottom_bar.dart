@@ -48,12 +48,25 @@ class TaskBottomBar extends StatelessWidget {
                       ),
                       TagButton(
                         tag: state.tag,
-                        onChanged: (tag) {},
+                        onChanged: (tag) {
+                          context.read<TaskBloc>().add(
+                                ChangeTagTaskEvent(
+                                  tag: tag,
+                                ),
+                              );
+                        },
                       ),
                       const NotifyButton(),
                       if (state.type == TypeTask.event)
                         RepeatButton(
                           days: state.days,
+                          onChanged: (days) {
+                            context.read<TaskBloc>().add(
+                                  ChangeDaysTaskEvent(
+                                    days: days,
+                                  ),
+                                );
+                          },
                         ),
                       CalendarButton(
                         date: state.dateStart,

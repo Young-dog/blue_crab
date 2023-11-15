@@ -19,23 +19,32 @@ class HabitAdapter extends TypeAdapter<Habit> {
     return Habit(
       title: fields[0] as String,
       description: fields[1] as String,
-      countRepetitions: fields[4] as int,
-      days: (fields[3] as List).cast<int>(),
+      days: (fields[2] as List).cast<int>(),
+      numberRepetitions: fields[3] as int,
+      completedHabits: (fields[4] as List).cast<CompletedHabit>(),
+      dateAdd: fields[5] as DateTime,
+      color: fields[6] as Color,
     );
   }
 
   @override
   void write(BinaryWriter writer, Habit obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
       ..write(obj.description)
-      ..writeByte(3)
+      ..writeByte(2)
       ..write(obj.days)
+      ..writeByte(3)
+      ..write(obj.numberRepetitions)
       ..writeByte(4)
-      ..write(obj.countRepetitions);
+      ..write(obj.completedHabits)
+      ..writeByte(5)
+      ..write(obj.dateAdd)
+      ..writeByte(6)
+      ..write(obj.color);
   }
 
   @override

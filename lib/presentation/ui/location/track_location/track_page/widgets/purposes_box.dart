@@ -14,7 +14,7 @@ class PurposesBox extends StatelessWidget {
 
     return TrackBox(
       icon: AssetNames.cupIcon,
-      title: t.track_page.purposes_box_title,
+      title: t.track_location.track_page.purposes_box_title,
       colorIcon: theme.palette.iconAccentThird,
       onPressedAdd: () {}, child: Container(),
     );

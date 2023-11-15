@@ -34,7 +34,7 @@ class TagPin extends StatelessWidget {
           ],
         ),
         child: Text(
-          t.task_button.tag_title(tag: tag.title),
+          t.common.tag_button.tag_title(tag: tag.title),
           style: theme.textTheme.labelSmall!.copyWith(
             color: theme.palette.textPrimary,
           ),

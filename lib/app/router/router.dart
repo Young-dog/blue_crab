@@ -35,5 +35,9 @@ class AppRouter extends _$AppRouter {
           page: TaskRoute.page,
           path: '/task',
         ),
+        AutoRoute(
+          page: HabitRoute.page,
+          path: '/habit',
+        ),
       ];
 }

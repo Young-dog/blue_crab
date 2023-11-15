@@ -82,7 +82,7 @@ class _TimeModalState extends State<TimeModal> {
                           Navigator.of(context).pop();
                         },
                         child: Text(
-                          t.calendar_button.delete,
+                          t.common.date_time_model.calendar_button.delete,
                           style: theme.textTheme.titleMedium!.copyWith(
                             color: theme.palette.textContrast,
                           ),
@@ -111,7 +111,7 @@ class _TimeModalState extends State<TimeModal> {
                         Navigator.of(context).pop();
                       },
                       child: Text(
-                        t.calendar_button.add,
+                        t.common.date_time_model.calendar_button.add,
                         style: theme.textTheme.titleMedium!.copyWith(
                           color: theme.palette.textContrast,
                         ),

@@ -13,8 +13,8 @@ class PriorityButton extends StatelessWidget {
     super.key,
   });
 
-  final void Function(PriorityTask priority) onChanged;
-  final PriorityTask? priority;
+  final void Function(Priority priority) onChanged;
+  final Priority? priority;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class PriorityButton extends StatelessWidget {
   Future<void> _openPriorityListMenu(BuildContext ctx) async {
     final theme = Theme.of(ctx);
 
-    const priorities = PriorityTask.values;
+    const priorities = Priority.values;
 
     await showModalBottomSheet(
       backgroundColor: theme.palette.bgPrimary,
@@ -51,12 +51,9 @@ class PriorityButton extends StatelessWidget {
           constraints: BoxConstraints(
             maxHeight: theme.spacings.x20 * 5,
           ),
-          child: BlocProvider.value(
-            value: BlocProvider.of<TaskBloc>(ctx),
-            child: _PriorityModal(
-              priorities: priorities,
-              onChanged: onChanged,
-            ),
+          child: _PriorityModal(
+            priorities: priorities,
+            onChanged: onChanged,
           ),
         );
       },
@@ -70,8 +67,8 @@ class _PriorityModal extends StatelessWidget {
     required this.onChanged,
   });
 
-  final List<PriorityTask> priorities;
-  final void Function(PriorityTask priority) onChanged;
+  final List<Priority> priorities;
+  final void Function(Priority priority) onChanged;
 
   @override
   Widget build(BuildContext context) {

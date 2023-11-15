@@ -49,6 +49,16 @@ Future<void> _registerDataSources() async {
       () async => LocaleEventsDataSourceImpl.create(
         hive: _getIt(),
       ),
+    )
+    ..registerSingletonAsync<LocaleHabitsDataSource>(
+          () async => LocaleHabitsDataSourceImpl.create(
+        hive: _getIt(),
+      ),
+    )
+    ..registerSingletonAsync<LocalePurposeDataSource>(
+          () async => LocalePurposeDataSourceImpl.create(
+        hive: _getIt(),
+      ),
     );
 }
 
@@ -73,6 +83,22 @@ Future<void> _registerRepositories() async {
       ),
       dependsOn: [
         LocaleEventsDataSource,
+      ],
+    )
+    ..registerSingletonAsync<HabitsRepository>(
+          () async => HabitsRepositoryImpl.create(
+        localeHabitsDataSource: _getIt(),
+      ),
+      dependsOn: [
+        LocaleHabitsDataSource,
+      ],
+    )
+    ..registerSingletonAsync<PurposesRepository>(
+          () async => PurposesRepositoryImpl.create(
+        localePurposeDataSource: _getIt(),
+      ),
+      dependsOn: [
+        LocalePurposeDataSource,
       ],
     );
 }

@@ -23,7 +23,7 @@ abstract class TaskModel extends Equatable {
   @HiveField(1)
   final String description;
   @HiveField(2)
-  final PriorityTask? priority;
+  final Priority? priority;
   @HiveField(3)
   final List<Subtask> subtasks;
   @HiveField(4)

@@ -21,4 +21,6 @@ class HiveTypeId {
 
   static const int taskModel = 10;
 
+  static const int repetitionHabit = 11;
+
 }

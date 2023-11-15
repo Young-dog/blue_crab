@@ -21,6 +21,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const FinancePage(),
       );
     },
+    HabitRoute.name: (routeData) {
+      final args = routeData.argsAs<HabitRouteArgs>(
+          orElse: () => const HabitRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: HabitPage(
+          habit: args.habit,
+          selectedDate: args.selectedDate,
+          key: args.key,
+        ),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -71,6 +83,48 @@ class FinanceRoute extends PageRouteInfo<void> {
   static const String name = 'FinanceRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HabitPage]
+class HabitRoute extends PageRouteInfo<HabitRouteArgs> {
+  HabitRoute({
+    Habit? habit,
+    DateTime? selectedDate,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          HabitRoute.name,
+          args: HabitRouteArgs(
+            habit: habit,
+            selectedDate: selectedDate,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'HabitRoute';
+
+  static const PageInfo<HabitRouteArgs> page = PageInfo<HabitRouteArgs>(name);
+}
+
+class HabitRouteArgs {
+  const HabitRouteArgs({
+    this.habit,
+    this.selectedDate,
+    this.key,
+  });
+
+  final Habit? habit;
+
+  final DateTime? selectedDate;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'HabitRouteArgs{habit: $habit, selectedDate: $selectedDate, key: $key}';
+  }
 }
 
 /// generated route for

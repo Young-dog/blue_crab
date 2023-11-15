@@ -183,7 +183,7 @@ class _BottomDateTimePickerState extends State<DateTimeModal> {
                         _showDialog(context);
                       },
                       child: Text(
-                        t.calendar_button.time,
+                        t.common.date_time_model.calendar_button.time,
                         style: theme.textTheme.titleMedium!.copyWith(
                           color: theme.palette.textPrimary,
                         ),
@@ -205,7 +205,7 @@ class _BottomDateTimePickerState extends State<DateTimeModal> {
                         Navigator.pop(context);
                       },
                       child: Text(
-                        t.calendar_button.add,
+                        t.common.date_time_model.calendar_button.add,
                         style: theme.textTheme.titleMedium!.copyWith(
                           color: theme.palette.textContrast,
                         ),

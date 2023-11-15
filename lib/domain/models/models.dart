@@ -2,6 +2,7 @@ export 'event.dart';
 export 'habit.dart';
 export 'priority_task.dart';
 export 'purpose.dart';
+export 'completed_habit.dart';
 export 'subtask.dart';
 export 'tag.dart';
 export 'task.dart';

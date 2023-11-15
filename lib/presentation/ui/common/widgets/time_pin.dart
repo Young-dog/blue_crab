@@ -31,7 +31,7 @@ class TimePin extends StatelessWidget {
         ),
       ),
       child: Text(
-        t.task_button.time_tittle(
+        t.common.time_pin.time_tittle(
           hours: time.hour,
           minutes: time.minute / 10 < 1
               ? '0${time.minute}'

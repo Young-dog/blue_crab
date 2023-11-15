@@ -21,6 +21,7 @@ class FilledInput extends StatelessWidget {
     this.autofillHints,
     this.suffixIcon,
     this.suffix,
+    this.textAlign = TextAlign.start,
     super.key,
   });
 
@@ -40,6 +41,7 @@ class FilledInput extends StatelessWidget {
   final bool autoFocus;
   final Widget? suffixIcon;
   final Widget? suffix;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class FilledInput extends StatelessWidget {
     final theme = Theme.of(context);
 
     return TextFormField(
+      textAlign: textAlign,
       textInputAction: TextInputAction.done,
       style: style,
       controller: controller,

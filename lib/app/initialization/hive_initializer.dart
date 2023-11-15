@@ -1,7 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../data/data.dart';
 import '../../domain/domain.dart';
-import '../app.dart';
 
 Future<void> initializeHive() async {
   await Hive.initFlutter();
@@ -36,6 +35,9 @@ Future<void> initializeHive() async {
     )
     ..registerAdapter(
       EventAdapter(),
+    )
+    ..registerAdapter(
+      CompletedHabitAdapter(),
     );
 
 

@@ -295,7 +295,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
               (e.days.contains(
                 state.selectedDate.weekday,
               )) ||
-              (state.selectedDate.year == DateTime
+              ((state.selectedDate.year == DateTime
                   .now()
                   .year &&
                   state.selectedDate.month == DateTime
@@ -303,7 +303,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
                       .month &&
                   state.selectedDate.day == DateTime
                       .now()
-                      .day)) &&
+                      .day) && e.days.isEmpty)) &&
               (!e.finishDates.contains(date));
         }
     )

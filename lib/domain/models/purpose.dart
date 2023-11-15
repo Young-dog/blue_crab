@@ -27,7 +27,7 @@ class Purpose extends Equatable {
   final String description;
 
   @HiveField(2)
-  final PriorityTask? priority;
+  final Priority? priority;
 
   @HiveField(3)
   final DateTime? dateStart;

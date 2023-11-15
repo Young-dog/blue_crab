@@ -18,7 +18,9 @@ class TaskView extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: TaskAppBar(task: taskModel,),
+      appBar: TaskAppBar(
+        task: taskModel,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: theme.spacings.x4,
@@ -37,8 +39,17 @@ class TaskView extends StatelessWidget {
                 ),
                 DescriptionsInput(
                   title: state.description,
+                  onChanged: (value) {
+                    context.read<TaskBloc>().add(
+                          ChangeDescriptionTaskEvent(
+                            description: value,
+                          ),
+                        );
+                  },
                 ),
-                SizedBox(height: theme.spacings.x4,),
+                SizedBox(
+                  height: theme.spacings.x4,
+                ),
                 DateTimeInformation(
                   dateStart: state.dateStart,
                   dateEnd: state.dateEnd,

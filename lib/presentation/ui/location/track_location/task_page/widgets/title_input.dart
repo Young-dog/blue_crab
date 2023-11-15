@@ -28,7 +28,7 @@ class TitleInput extends StatelessWidget {
       },
       style: theme.textTheme.titleMedium,
       autoFocus: true,
-      hintText: t.task_page.title_label,
+      hintText: t.track_location.title_label,
     );
   }
 }

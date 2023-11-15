@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../app/app.dart';
-import '../../../presentation.dart';
 
 class RepeatDaysModal extends StatefulWidget {
   const RepeatDaysModal({
     required this.days,
+    required this.onChanged,
     super.key,
   });
 
   final List<int> days;
+
+  final void Function(List<int> days) onChanged;
 
   @override
   State<RepeatDaysModal> createState() => _RepeatDaysModalState();
 }
 
 class _RepeatDaysModalState extends State<RepeatDaysModal> {
+
+  final _daysChar = DateFormat.EEEE(LocaleSettings.currentLocale.languageCode)
+      .dateSymbols
+      .SHORTWEEKDAYS.toList();
+
+  @override
+  void initState() {
+    final sun = _daysChar.removeAt(0);
+
+    _daysChar.add(sun);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
-    final daysChar = DateFormat.EEEE(LocaleSettings.currentLocale.languageCode)
-        .dateSymbols
-        .SHORTWEEKDAYS;
 
     return SafeArea(
       child: Container(
@@ -38,63 +48,92 @@ class _RepeatDaysModalState extends State<RepeatDaysModal> {
           maxHeight: theme.spacings.x20 * 5,
         ),
         padding: const EdgeInsets.only(top: 6.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: daysChar.map(
-            (e) {
-              final day = daysChar.indexOf(e) == 0 ? 7 : daysChar.indexOf(e);
-              return GestureDetector(
-                onTap: () {
-                  if (widget.days.contains(day)) {
-                    setState(() {
-                      widget.days.remove(day);
-                    });
-                  } else {
-                    setState(() {
-                      widget.days.add(day);
-                    });
-                  }
-
-                  context.read<TaskBloc>().add(
-                        ChangeDaysTaskEvent(
-                          days: widget.days,
-                        ),
-                      );
+        child: Padding(
+          padding: EdgeInsets.all(theme.spacings.x4),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  widget.onChanged(List.generate(7, (index) => index+1));
+                  Navigator.pop(context);
                 },
-                child: Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: theme.spacings.x2,
-                  ),
-                  padding: EdgeInsets.all(
-                    theme.spacings.x2,
-                  ),
-                  decoration: BoxDecoration(
-                    color: widget.days.contains(
-                      day,
-                    )
-                        ? theme.palette.buttonPrimary
-                        : theme.palette.buttonContrast,
-                    borderRadius: BorderRadius.all(
-                      theme.radius.x4,
-                    ),
-                    border: Border.all(
-                      width: 1,
-                      color: theme.palette.iconPrimary,
-                    ),
-                  ),
-                  child: Text(
-                    e,
-                    style: theme.textTheme.bodySmall!.copyWith(
-                      color: theme.palette.textPrimary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+                child: Text(
+                  t.common.repeat_days_modal.every_day_title,
                 ),
-              );
-            },
-          ).toList(),
+              ),
+              SizedBox(width: theme.spacings.x6,),
+              Expanded(
+                child: GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: _daysChar.length,
+                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: theme.spacings.x3,
+                    crossAxisCount: 2,
+                    mainAxisExtent: theme.spacings.x10,
+                  ),
+                  itemBuilder: (
+                      context,
+                      index,
+                      ) {
+
+                    final day = _daysChar[index];
+
+                    return GestureDetector(
+                      onTap: () {
+                        if (widget.days.contains(index+1)) {
+                          setState(() {
+                            widget.days.remove(index+1);
+                          });
+                        } else {
+                          setState(() {
+                            widget.days.add(index+1);
+                          });
+                        }
+
+                        widget.onChanged(widget.days);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: theme.spacings.x2,
+                        ),
+                        padding: EdgeInsets.all(
+                          theme.spacings.x2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: widget.days.contains(
+                            index+1,
+                          )
+                              ? theme.palette.buttonPrimary
+                              : theme.palette.buttonContrast,
+                          borderRadius: BorderRadius.all(
+                            theme.radius.x4,
+                          ),
+                          border: Border.all(
+                            width: 1,
+                            color: theme.palette.iconPrimary,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            day,
+                            style: theme.textTheme.bodySmall!.copyWith(
+                              color: theme.palette.textPrimary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
 }

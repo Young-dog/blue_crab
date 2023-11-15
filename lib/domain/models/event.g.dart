@@ -20,7 +20,7 @@ class EventAdapter extends TypeAdapter<Event> {
       type: fields[5] as TypeTask,
       title: fields[0] as String,
       description: fields[1] as String,
-      priority: fields[2] as PriorityTask?,
+      priority: fields[2] as Priority?,
       subtasks: (fields[3] as List).cast<Subtask>(),
       tag: fields[4] as Tag?,
       dateStart: fields[6] as DateTime?,

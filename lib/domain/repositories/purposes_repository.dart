@@ -18,7 +18,7 @@ abstract class PurposesRepository {
     required String title,
     required String description,
     required Tag? tag,
-    required PriorityTask? priority,
+    required Priority? priority,
     required DateTime? dateStart,
     required DateTime? dateEnd,
     required TimeOfDay? timeStart,
@@ -38,6 +38,19 @@ class PurposesRepositoryImpl implements PurposesRepository, Disposable {
         _localePurposeDataSource = localePurposeDataSource,
         _purposesController = StreamController<List<Purpose>>.broadcast();
 
+  static Future<PurposesRepositoryImpl> create({
+    required LocalePurposeDataSource localePurposeDataSource,
+  }) async {
+    final purposes = await localePurposeDataSource.getPurposes();
+
+    final purposesRepositoryImpl = PurposesRepositoryImpl._internal(
+      localePurposeDataSource: localePurposeDataSource,
+      purposes: purposes,
+    );
+
+    return purposesRepositoryImpl;
+  }
+
   List<Purpose> _purposes;
 
   final StreamController<List<Purpose>> _purposesController;
@@ -50,7 +63,7 @@ class PurposesRepositoryImpl implements PurposesRepository, Disposable {
     required String title,
     required String description,
     required Tag? tag,
-    required PriorityTask? priority,
+    required Priority? priority,
     required DateTime? dateStart,
     required DateTime? dateEnd,
     required TimeOfDay? timeStart,

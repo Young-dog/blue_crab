@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:get_it/get_it.dart';
 
@@ -16,8 +17,11 @@ abstract class HabitsRepository {
     required String title,
     required String description,
     required List<int> days,
-    required int countRepetitions,
+    required int numberRepetitions,
+    required List<CompletedHabit> completedHabits,
+    required DateTime dateAdd,
     required Habit? previousHabit,
+    required Color color,
   });
 
   Future<void> delHabit({
@@ -57,14 +61,20 @@ class HabitsRepositoryImpl implements HabitsRepository, Disposable {
     required String title,
     required String description,
     required List<int> days,
-    required int countRepetitions,
+    required int numberRepetitions,
+    required List<CompletedHabit> completedHabits,
+    required DateTime dateAdd,
     required Habit? previousHabit,
+    required Color color,
   }) async {
     final currentHabit = Habit(
       title: title,
       description: description,
-      countRepetitions: countRepetitions,
       days: days,
+      numberRepetitions: numberRepetitions,
+      completedHabits: completedHabits,
+      dateAdd: dateAdd,
+      color: color,
     );
 
     await _localeHabitsDataSource.addHabit(

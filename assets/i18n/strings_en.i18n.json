@@ -1,9 +1,4 @@
 {
-  "track_page" : {
-    "habits_box_title" : "Habits",
-    "purposes_box_title" : "Purposes",
-    "tasks_box_title" : "Tasks and events"
-  },
   "priority_task" : {
     "critical" : "Critical",
     "important" : "Important",
@@ -11,27 +6,47 @@
     "low" : "Low",
     "deferred" : "Deferred"
   },
-  "task_type" : {
-    "task" : "Task",
-    "event" : "Event"
-  },
-  "task_page" : {
-    "title_label" : "Title...",
+  "common" : {
+    "date_time_model" : {
+      "calendar_button" : {
+        "add" : "Add",
+        "time" : "+ Time",
+        "delete" : "Delete"
+      }
+    },
+    "tag_button" : {
+      "tag_title" : "# $tag"
+    },
     "date_time_pin": {
       "date" : "$day $month ",
       "time" : "$hours:$minutes"
+    },
+    "time_pin" : {
+      "time_tittle": "$hours:$minutes"
+    },
+    "subtask_input" : {
+      "hint_text" : "Subtask"
+    },
+    "descriptions_input" : "Description",
+    "repeat_days_modal" : {
+      "every_day_title" : "Every day"
     }
   },
-  "calendar_button" : {
-    "add" : "Добавить",
-    "time" : "+ Время",
-    "delete" : "Удалить"
-  },
-  "subtask_input" : {
-    "hint_text" : "Подзадача"
-  },
-  "task_button" : {
-    "tag_title" : "# $tag",
-    "time_tittle": "$hours:$minutes"
+  "track_location" : {
+    "title_label" : "Title...",
+    "habit_page" : {
+      "repetitions_habit_title" : "Repetitions",
+      "missed_habit_title" : "Missed",
+      "completed_habit_title" : "Completed"
+    },
+    "track_page" : {
+      "habits_box_title" : "Habits",
+      "purposes_box_title" : "Purposes",
+      "tasks_box_title" : "Tasks and events"
+    },
+    "task_type" : {
+      "task" : "Task",
+      "event" : "Event"
+    }
   }
 }

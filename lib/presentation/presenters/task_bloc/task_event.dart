@@ -51,7 +51,7 @@ class ChangePriorityTaskEvent extends TaskEvent {
     required this.priority,
   });
 
-  final PriorityTask priority;
+  final Priority priority;
 
   @override
   List<Object?> get props => [

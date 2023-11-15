@@ -75,7 +75,7 @@ class TaskState extends Equatable {
   final TypeTask type;
   final String title;
   final String description;
-  final PriorityTask? priority;
+  final Priority? priority;
   final Tag? tag;
   final DateTime? dateStart;
   final DateTime? dateEnd;
@@ -91,7 +91,7 @@ class TaskState extends Equatable {
     TypeTask? type,
     String? title,
     String? description,
-    PriorityTask? priority,
+    Priority? priority,
     Tag? tag,
     DateTime? dateStart,
     DateTime? dateEnd,

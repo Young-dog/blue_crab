@@ -18,7 +18,7 @@ abstract class EventsRepository {
     required TypeTask type,
     required String title,
     required String description,
-    required PriorityTask? priority,
+    required Priority? priority,
     required List<Subtask> subtasks,
     required Tag? tag,
     required DateTime? dateStart,
@@ -65,7 +65,7 @@ class EventsRepositoryImpl implements EventsRepository, Disposable {
     required TypeTask type,
     required String title,
     required String description,
-    required PriorityTask? priority,
+    required Priority? priority,
     required List<Subtask> subtasks,
     required Tag? tag,
     required DateTime? dateStart,
@@ -84,6 +84,7 @@ class EventsRepositoryImpl implements EventsRepository, Disposable {
       days: days,
       finishDates: finishDates, type: type,
     );
+
 
     await _localeEventsDataSource.addEvent(
       previousEvent: previousEvent,

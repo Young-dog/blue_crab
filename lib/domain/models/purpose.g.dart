@@ -20,7 +20,7 @@ class PurposeAdapter extends TypeAdapter<Purpose> {
       title: fields[0] as String,
       description: fields[1] as String,
       tag: fields[7] as Tag?,
-      priority: fields[2] as PriorityTask?,
+      priority: fields[2] as Priority?,
       dateStart: fields[3] as DateTime?,
       dateEnd: fields[4] as DateTime?,
       timeStart: fields[5] as TimeOfDay?,

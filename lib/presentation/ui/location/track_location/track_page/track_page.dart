@@ -20,6 +20,12 @@ class TrackPage extends StatelessWidget {
             eventsRepository: GetIt.instance<EventsRepository>(),
           ),
         ),
+        BlocProvider(
+          create: (context) => HabitsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => PurposesBloc(),
+        ),
       ],
       child: const TrackView(),
     );

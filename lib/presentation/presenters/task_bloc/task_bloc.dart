@@ -15,7 +15,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     TypeTask? type,
     String? title,
     String? description,
-    PriorityTask? priority,
+    Priority? priority,
     Tag? tag,
     DateTime? dateStart,
     DateTime? dateEnd,
@@ -266,7 +266,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     AddTaskEvent event,
     Emitter<TaskState> emit,
   ) async {
-print(event.previousModel);
     if (state.type == TypeTask.task) {
       await _tasksRepository.addTask(
         type: state.type,

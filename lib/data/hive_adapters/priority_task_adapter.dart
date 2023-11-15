@@ -3,19 +3,19 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../app/app.dart';
 import '../../domain/domain.dart';
 
-class PriorityTaskAdapter extends TypeAdapter<PriorityTask> {
+class PriorityTaskAdapter extends TypeAdapter<Priority> {
   @override
-  PriorityTask read(BinaryReader reader) {
+  Priority read(BinaryReader reader) {
     final value = reader.readInt();
 
-    return PriorityTask.values[value];
+    return Priority.values[value];
   }
 
   @override
   int get typeId => HiveTypeId.priorityTask;
 
   @override
-  void write(BinaryWriter writer, PriorityTask obj) {
+  void write(BinaryWriter writer, Priority obj) {
     writer.writeInt(
       obj.index,
     );

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../app/app.dart';
@@ -14,9 +15,13 @@ class HabitsBox extends StatelessWidget {
 
     return TrackBox(
       icon: AssetNames.habitsIcon,
-      title: t.track_page.habits_box_title,
+      title: t.track_location.track_page.habits_box_title,
       colorIcon: theme.palette.iconAccentFirst,
-      onPressedAdd: () {}, child: Container(),
+      onPressedAdd: () {
+        context.router.push(
+          HabitRoute(),
+        );
+      }, child: Container(),
     );
   }
 }

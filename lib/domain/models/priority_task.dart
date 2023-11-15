@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/app.dart';
 
-enum PriorityTask {
+enum Priority {
   critical,
   important,
   medium,
@@ -11,30 +11,30 @@ enum PriorityTask {
 
   String getText(AppLocale locale) {
     switch (this) {
-      case PriorityTask.critical:
+      case Priority.critical:
         return locale.translations.priority_task.critical;
-      case PriorityTask.important:
+      case Priority.important:
         return locale.translations.priority_task.important;
-      case PriorityTask.medium:
+      case Priority.medium:
         return locale.translations.priority_task.medium;
-      case PriorityTask.low:
+      case Priority.low:
         return locale.translations.priority_task.low;
-      case PriorityTask.deferred:
+      case Priority.deferred:
         return locale.translations.priority_task.deferred;
     }
   }
 
   Color getColor(Palette palette) {
     switch (this) {
-      case PriorityTask.critical:
+      case Priority.critical:
         return palette.other.critical;
-      case PriorityTask.important:
+      case Priority.important:
         return palette.other.important;
-      case PriorityTask.medium:
+      case Priority.medium:
         return palette.other.medium;
-      case PriorityTask.low:
+      case Priority.low:
         return palette.other.low;
-      case PriorityTask.deferred:
+      case Priority.deferred:
         return palette.other.deferred;
     }
   }

@@ -30,14 +30,14 @@ class DateTimePin extends StatelessWidget {
         ),
       ),
       child: Text(
-        t.task_page.date_time_pin.date(
+        t.common.date_time_pin.date(
               day: date?.day ?? '',
               month: date != null
                   ? DateFormat.MMM(LocaleSettings.currentLocale.languageCode)
                       .format(date!)
                   : '',
             ) + (time != null ?
-            t.task_page.date_time_pin.time(
+            t.common.date_time_pin.time(
               hours: time!.hour,
               minutes: time!.minute / 10 < 1 ? '0${time!.minute}' : time!.minute,
             ) : ''),
